@@ -1,0 +1,32 @@
+~inc:header.inc~
+<div id="content">
+
+<h1>Temperature and humidity</h1>
+
+<form method="get" action="/admin/temp.htm" name="col">
+<fieldset>
+<table border="0" cellpadding="0" cellspacing="10" >
+<tbody>
+  <tr align="left">
+  <td width="250">Temperature override:</td><td><select name="TO" class="sm" value=><option value="0" ~tempSel(0)~>No</option>
+                                         <option value="1" ~tempSel(1)~>Yes</option></select></td>
+  </tr>
+  <tr align="left">
+  <td width="250">Temperature static value:</td><td><input type="text" name="TV" value="~tempStatic~" maxlength="3" width="20"></td>
+  </tr>
+  
+    <tr align="left">
+  <td width="250">Humidity override:</td><td><select name="HO" class="sm" value=><option value="0" ~humidSel(0)~>No</option>
+                                         <option value="1" ~humidSel(1)~>Yes</option></select></td>
+  </tr>
+  <tr align="left">
+  <td width="250">Humidity static value:</td><td><input type="text" name="HV" value="~humidStatic~" maxlength="3" width="20"></td>
+  </tr>
+  
+</tbody>
+</table>
+<div><input type="submit" class="sm" value="Save" /></div>
+</fieldset>
+</form>
+</div>
+~inc:footer.inc~

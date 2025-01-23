@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ERM2024</title>
+    <link
+      href="/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script src="/elak.js" type="text/javascript"></script>
+  </head>
+  <body style="background-color: rgb(141, 141, 141)">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fs-3">
+      <div class="container">
+        <a class="navbar-brand" href="http://www.elak.hr/">
+          <img src="/elak_zlatni.png" width="130" height="80" alt="ELAK" />
+        </a>
+        <button
+          class="navbar-toggler d-lg-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/index.htm">Home</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                href="/admin/sat.htm"
+                aria-current="page"
+                >Time <span class="visually-hidden">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/prgm.htm">Program</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/upr.htm">Control</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/config.htm">Network</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/ntp.htm">Sync</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container p-3" id="content" style="background-color: dimgray">
+      <h1
+        class="text-light text-center border border-3 border-danger rounded-3 mt-2 pb-1"
+      >
+        Time adjustment
+      </h1>
+      <span id="box">
+        <form>
+          <div class="row" id="box1">
+            <h4
+              class="col border border-3 border-danger rounded-3 text-light text-center m-2"
+            >
+              Current device date and time:
+            </h4>
+
+            <div
+              class="siva col border border-3 border-danger rounded-3 text-light m-2"
+              id="UTCdate"
+              style="text-align: center"
+            >
+              00.00.0000
+            </div>
+            <div
+              class="siva col border border-3 border-danger rounded-3 text-light m-2"
+              id="UTCtime"
+              style="text-align: center"
+            >
+              00:00:00
+            </div>
+          </div>
+          <div class="border border-3 border-danger rounded-3 p-2">
+            <div class="row">
+              <div id="noviDatum" class="col">
+                <label for="dateInput" class="form-label text-light"
+                  >New date:</label
+                >
+
+                <div id="dateStyle">
+                  <input
+                    type="date"
+                    id="dateInput"
+                    value="2020-01-01"
+                    class="form-control text-bg-light"
+                    min="2020-01-01"
+                  />
+                </div>
+                <div class="mb-3 row">
+                  <div class="col">
+                    <label for="dL" class="form-label text-light"
+                      >Daylight Saving:</label
+                    >
+                    <select class="form-select" name="dL" id="dL">
+                      <option selected>Select one</option>
+                      <option value="00" ~cloSel(5,0)~>No</option>
+                      <option value="01" ~cloSel(5,1)~>Yes</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label for="t2" class="form-label text-light"
+                      >Time zone:</label
+                    >
+                    <select class="form-select" name="t2" id="t2">
+                      <option selected>Select one</option>
+
+                      <option value="32" ~cloSel(6,32)~>-12 h</option>
+                      <option value="31" ~cloSel(6,31)~>-11 h</option>
+                      <option value="30" ~cloSel(6,30)~>-10 h</option>
+                      <option value="29" ~cloSel(6,29)~>-9 h</option>
+                      <option value="28" ~cloSel(6,28)~>-8 h</option>
+                      <option value="27" ~cloSel(6,27)~>-7 h</option>
+                      <option value="26" ~cloSel(6,26)~>-6 h</option>
+                      <option value="25" ~cloSel(6,25)~>-5 h</option>
+                      <option value="24" ~cloSel(6,24)~>-4 h</option>
+                      <option value="23" ~cloSel(6,23)~>-3 h</option>
+                      <option value="22" ~cloSel(6,22)~>-2 h</option>
+                      <option value="21" ~cloSel(6,21)~>-1 h</option>
+                      <option value="00" ~cloSel(6,0)~>+0 h</option>
+                      <option value="01" ~cloSel(6,1)~>+1 h</option>
+                      <option value="02" ~cloSel(6,2)~>+2 h</option>
+                      <option value="03" ~cloSel(6,3)~>+3 h</option>
+                      <option value="04" ~cloSel(6,4)~>+4 h</option>
+                      <option value="05" ~cloSel(6,5)~>+5 h</option>
+                      <option value="06" ~cloSel(6,6)~>+6 h</option>
+                      <option value="07" ~cloSel(6,7)~>+7 h</option>
+                      <option value="08" ~cloSel(6,8)~>+8 h</option>
+                      <option value="09" ~cloSel(6,9)~>+9 h</option>
+                      <option value="10" ~cloSel(6,10)~>+10 h</option>
+                      <option value="11" ~cloSel(6,11)~>+11 h</option>
+                      <option value="12" ~cloSel(6,12)~>+12 h</option>
+                      <option value="13" ~cloSel(6,13)~>+13 h</option>
+                      <option value="14" ~cloSel(6,14)~>+14 h</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <label for="time" class="form-label text-light">
+                  New Time:
+                </label>
+                <div>
+                  <input
+                    type="time"
+                    id="time"
+                    class="form-control text-bg-light"
+                    value="00:00"
+                  />
+                </div>
+                <div id="slideri" class="row">
+                  <div class="col">
+                    <label class="form-label text-light" for="slider1"
+                      >Hours:</label
+                    ><input
+                      type="range"
+                      class="form-range"
+                      id="slider1"
+                      min="0"
+                      max="23"
+                      step="1"
+                      value="0"
+                    />
+                  </div>
+                  <div class="col">
+                    <label for="slider2" class="form-label text-light"
+                      >Minutes:</label
+                    ><input
+                      type="range"
+                      class="form-range"
+                      id="slider2"
+                      min="0"
+                      max="59"
+                      step="1"
+                      value="0"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row p-2" id="butt">
+              <input
+                type="button"
+                id="save"
+                value="Save new Date and Time"
+                class="btn btn-danger"
+              />
+            </div>
+          </div>
+        </form>
+        <!-- Footer -->
+        <div
+          class="text-center text-light border border-3 border-danger rounded-3 pt-2 mb-2 mt-2"
+        >
+          <p>
+            Copyrights &copy; 2025
+            <a href="http://www.elak.hr/">ELAK d.o.o. KASTAV</a>
+          </p>
+          <p>
+            Frlani 10, HR51215 KASTAV, Hrvatska, Tel: +385 51 320 350,
+            elak@elak.hr
+          </p>
+        </div>
+      </span>
+    </div>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+
+<script language="javascript">
+  function updateTime(xmlData) {
+    var vrijeme;
+    var datum;
+
+    if (getXMLValue(xmlData, "dat0").length == 1) {
+      datum = "0" + getXMLValue(xmlData, "dat0") + ".";
+    } else {
+      datum = getXMLValue(xmlData, "dat0") + ".";
+    }
+    if (getXMLValue(xmlData, "dat1").length == 1) {
+      datum += "0" + getXMLValue(xmlData, "dat1") + ".";
+    } else {
+      datum += getXMLValue(xmlData, "dat1") + ".";
+    }
+    datum += "20";
+    if (getXMLValue(xmlData, "dat2").length == 1) {
+      datum += "0" + getXMLValue(xmlData, "dat2") + ".";
+    } else {
+      datum += getXMLValue(xmlData, "dat2") + ".";
+    }
+    document.getElementById("UTCdate").innerHTML = datum;
+
+    if (getXMLValue(xmlData, "dat3").length == 1) {
+      vrijeme = "0" + getXMLValue(xmlData, "dat3") + ":";
+    } else {
+      vrijeme = getXMLValue(xmlData, "dat3") + ":";
+    }
+    if (getXMLValue(xmlData, "dat4").length == 1) {
+      vrijeme += "0" + getXMLValue(xmlData, "dat4") + ":";
+    } else {
+      vrijeme += getXMLValue(xmlData, "dat4") + ":";
+    }
+    if (getXMLValue(xmlData, "dat5").length == 1) {
+      vrijeme += "0" + getXMLValue(xmlData, "dat5");
+    } else {
+      vrijeme += getXMLValue(xmlData, "dat5");
+    }
+    document.getElementById("UTCtime").innerHTML = vrijeme;
+  }
+  setTimeout("newAJAXCommand('/date.xml', updateTime, true)", 500);
+
+  var buttonSave = document.getElementById("save");
+  buttonSave.onclick = function () {
+    var valueDatum = document.getElementById("dateInput").value;
+    var valueTime = document.getElementById("time").value;
+    var valueDS = document.getElementById("dL").value;
+    var valueTZ = document.getElementById("t2").value;
+    var dataSubmit = "";
+
+    dataSubmit += valueDatum[2] + valueDatum[3];
+    dataSubmit += ",";
+    dataSubmit += valueDatum[5] + valueDatum[6];
+    dataSubmit += ",";
+    dataSubmit += valueDatum[8] + valueDatum[9];
+    dataSubmit += ",";
+    dataSubmit += valueTime[0] + valueTime[1];
+    dataSubmit += ",";
+    dataSubmit += valueTime[3] + valueTime[4];
+    dataSubmit += ",";
+    dataSubmit += valueDS;
+    dataSubmit += ",";
+    dataSubmit += valueTZ;
+
+    const endpoint = `/admin/dat.cgi?dat=${dataSubmit}`;
+
+    fetch(endpoint, {
+      method: "POST",
+    })
+      .then((response) => {
+        response.json();
+      })
+      .then((data) => {
+        console.log("Data received:", data);
+      })
+      .catch((error) => {
+        console.error("Error during fetch:", error);
+      });
+  };
+
+  document.getElementById("slider1").addEventListener("input", function () {
+    var novoVrijeme = document.getElementById("time");
+    var vrijeme = novoVrijeme.value;
+    var sati = this.value;
+
+    if (sati.length == 1) {
+      sati = "0" + this.value;
+    }
+    novoVrijeme.value = sati + ":" + vrijeme[3] + vrijeme[4];
+  });
+
+  document.getElementById("slider2").addEventListener("input", function () {
+    var novoVrijeme = document.getElementById("time");
+    var vrijeme = novoVrijeme.value;
+    var minute = this.value;
+
+    if (minute.length == 1) {
+      minute = "0" + this.value;
+    }
+    novoVrijeme.value = vrijeme[0] + vrijeme[1] + ":" + minute;
+  });
+  window.onload = activeTab();
+</script>

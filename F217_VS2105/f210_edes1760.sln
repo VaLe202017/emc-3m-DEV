@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webhost.Web", "clock_adj.Web\webhost.Web.csproj", "{0F6106A6-E9AA-408E-8606-5CB0560DACA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sat", "sat\sat.csproj", "{5FC58476-71DC-41C8-8663-B2476DB27B7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F6106A6-E9AA-408E-8606-5CB0560DACA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6106A6-E9AA-408E-8606-5CB0560DACA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6106A6-E9AA-408E-8606-5CB0560DACA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6106A6-E9AA-408E-8606-5CB0560DACA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC58476-71DC-41C8-8663-B2476DB27B7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC58476-71DC-41C8-8663-B2476DB27B7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC58476-71DC-41C8-8663-B2476DB27B7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC58476-71DC-41C8-8663-B2476DB27B7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

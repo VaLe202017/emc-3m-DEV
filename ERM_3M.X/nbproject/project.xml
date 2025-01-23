@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>com.microchip.mplab.nbide.embedded.makeproject</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/make-project/1">
+            <name>ERM_3M</name>
+            <creation-uuid>63ab4621-6868-4c30-8306-5a45b87f5947</creation-uuid>
+            <make-project-type>0</make-project-type>
+            <c-extensions>c</c-extensions>
+            <cpp-extensions/>
+            <header-extensions>h</header-extensions>
+            <sourceEncoding>ISO-8859-1</sourceEncoding>
+            <asminc-extensions/>
+            <make-dep-projects/>
+            <sourceRootList>
+                <sourceRootElem>../app</sourceRootElem>
+                <sourceRootElem>../Microchip/Include</sourceRootElem>
+                <sourceRootElem>../Microchip/TCPIP Stack</sourceRootElem>
+                <sourceRootElem>../Microchip/TCPIP_Stack</sourceRootElem>
+                <sourceRootElem>../uCLIB</sourceRootElem>
+                <sourceRootElem>../pt</sourceRootElem>
+                <sourceRootElem>../gen</sourceRootElem>
+                <sourceRootElem>../web_pages2</sourceRootElem>
+                <sourceRootElem>../framework</sourceRootElem>
+                <sourceRootElem>../Utilities</sourceRootElem>
+            </sourceRootList>
+            <confList>
+                <confElem>
+                    <name>F210V02</name>
+                    <type>2</type>
+                </confElem>
+            </confList>
+            <formatting>
+                <project-formatting-style>false</project-formatting-style>
+            </formatting>
+        </data>
+    </configuration>
+</project>

@@ -1,0 +1,68 @@
+~inc:header.inc~
+<div id="content">
+
+    <h1>Power saving</h1>
+
+    <form method="get" action="/admin/lopwr.htm" name="col">
+        <fieldset>
+            <table border="0" cellpadding="0" cellspacing="10">
+                <tbody>
+
+                    <tr align="left">
+                        <td width="250">Enable power saving mode:</td>
+                        <td>
+                            <select name="en" class="sm"> <option value="00" ~lopwrEn(0)~>No</option>
+                                                          <option value="01" ~lopwrEn(1)~>Yes</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr align="left">
+                        <td width="250">Brightness:</td>
+                        <td>
+                            <select name="in" class="sm" value=>
+                                                  <option value="00" ~lopwrIn(0)~>5%</option>
+                                                  <option value="01" ~lopwrIn(1)~>10%</option>
+                                                  <option value="02" ~lopwrIn(2)~>20%</option>
+                                                  <option value="03" ~lopwrIn(3)~>30%</option>
+                                                  <option value="04" ~lopwrIn(4)~>40%</option>
+                                                  <option value="05" ~lopwrIn(5)~>50%</option>
+                                                  <option value="06" ~lopwrIn(6)~>60%</option>
+                                                  <option value="07" ~lopwrIn(7)~>70%</option>
+                                                  <option value="08" ~lopwrIn(8)~>80%</option>
+                                                  <option value="09" ~lopwrIn(9)~>90%</option>
+                                                  <option value="10" ~lopwrIn(10)~>100%</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr align="left">
+                        <td width="250">Beep every hour</td>
+                        <td>
+                            <select name="be" class="sm" value=>
+                                                  <option value="00" ~lopwrBe(0)~>No</option>
+                                                  <option value="01" ~lopwrBe(1)~>Yes</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr align="left">
+                        <td width="250">From</td>
+                        <td>
+                            <input type="time" name="fr" value="~lopwrFrom~" placeholder="hrs:mins" minlength="5" pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$">
+                        </td>
+                    </tr>
+
+                    <tr align="left">
+                        <td width="250">To</td>
+                        <td>
+                            <input type="time" name="to" value="~lopwrTo~" minlength="5" placeholder="hrs:mins" pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$">
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <div><input type="submit" class="sm" value="Save" /></div>
+        </fieldset>
+    </form>
+</div>
+~inc:footer.inc~

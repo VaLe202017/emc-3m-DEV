@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ERM2024</title>
+    <link
+      href="/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script src="/elak.js" type="text/javascript"></script>
+  </head>
+  <body style="background-color: rgb(141, 141, 141)">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fs-3">
+      <div class="container">
+        <a class="navbar-brand" href="http://www.elak.hr/">
+          <img src="/elak_zlatni.png" width="130" height="80" alt="ELAK" />
+        </a>
+        <button
+          class="navbar-toggler d-lg-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/index.htm">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/sat.htm">Time</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/prgm.htm">Program</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                href="/admin/upr.htm"
+                aria-current="page"
+                >Control <span class="visually-hidden">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/config.htm">Network</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/ntp.htm">Sync</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container p-3" id="content" style="background-color: dimgray">
+      <h1
+        class="text-light text-center border border-3 border-danger rounded-3 mt-2 pb-1"
+      >
+        Output control
+      </h1>
+      <div class="row">
+        <div class="col">
+          <div
+            class="card border border-3 border-danger bg-secondary rounded-3"
+          >
+            <div class="card-body d-grid justify-content-center">
+              <h3 class="card-title text-light">
+                Enable/disable relay programs
+              </h3>
+              <div class="row mt-3">
+                <div class="form-check col form-switch text-light">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="R1akt"
+                  />
+                  <label class="form-check-label" for="R1akt">R1</label>
+                </div>
+
+                <div class="form-check col form-switch text-light">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="R2akt"
+                  />
+                  <label class="form-check-label" for="R2akt">R2</label>
+                </div>
+
+                <div class="form-check col form-switch text-light">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="R3akt"
+                  />
+                  <label class="form-check-label" for="R3akt">R3</label>
+                </div>
+
+                <div class="form-check col form-switch text-light">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="R4akt"
+                  />
+                  <label class="form-check-label" for="R4akt">R4</label>
+                </div>
+
+                <div class="form-check col form-switch text-light">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="R5akt"
+                  />
+                  <label class="form-check-label" for="R5akt">R5</label>
+                </div>
+
+                <div class="form-check col form-switch text-light">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="R6akt"
+                  />
+                  <label class="form-check-label" for="R6akt">R6</label>
+                </div>
+              </div>
+              <button
+                type="button"
+                style="margin-top: 50px"
+                id="SubmitBut"
+                class="btn btn-danger"
+              >
+                Save settings
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div
+            class="card border border-3 border-danger bg-secondary rounded-3"
+          >
+            <div class="card-body">
+              <div class="row">
+                <h3 class="card-title text-light">Manual relay toggle</h3>
+                <div class="col d-grid justify-content-center">
+                  <div id="ind1" class="indication" id="r1"></div>
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-lg"
+                    aria-pressed="false"
+                    autocomplete="off"
+                    id="R1"
+                  >
+                    R1
+                  </button>
+                </div>
+
+                <div class="col d-grid justify-content-center">
+                  <div id="ind2" class="indication" id="r2"></div>
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-lg"
+                    aria-pressed="false"
+                    autocomplete="off"
+                    id="R2"
+                  >
+                    R2
+                  </button>
+                </div>
+                <div class="col d-grid justify-content-center">
+                  <div id="ind3" class="indication" id="r3"></div>
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-lg"
+                    aria-pressed="false"
+                    autocomplete="off"
+                    id="R3"
+                  >
+                    R3
+                  </button>
+                </div>
+                <div class="col d-grid justify-content-center">
+                  <div id="ind4" class="indication" id="r4"></div>
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-lg"
+                    aria-pressed="false"
+                    autocomplete="off"
+                    id="R4"
+                  >
+                    R4
+                  </button>
+                </div>
+                <div class="col d-grid justify-content-center">
+                  <div id="ind5" class="indication" id="r5"></div>
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-lg"
+                    aria-pressed="false"
+                    autocomplete="off"
+                    id="R5"
+                  >
+                    R5
+                  </button>
+                </div>
+                <div class="col d-grid justify-content-center">
+                  <div id="ind6" class="indication" id="r6"></div>
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-lg"
+                    aria-pressed="false"
+                    autocomplete="off"
+                    id="R6"
+                  >
+                    R6
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <div
+        class="text-center text-light mt-1 pt-2 border border-3 border-danger rounded-3"
+      >
+        <p>
+          Copyrights &copy; 2025
+          <a href="http://www.elak.hr/">ELAK d.o.o. KASTAV</a>
+        </p>
+        <p>
+          Frlani 10, HR51215 KASTAV, Hrvatska, Tel: +385 51 320 350,
+          elak@elak.hr
+        </p>
+      </div>
+    </div>
+
+    <script
+      src="/bootstrap/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
+<script language="javascript">
+  var relay1 = document.getElementById("R1");
+  var relay2 = document.getElementById("R2");
+  var relay3 = document.getElementById("R3");
+  var relay4 = document.getElementById("R4");
+  var relay5 = document.getElementById("R5");
+  var relay6 = document.getElementById("R6");
+
+  relay1.onclick = function () {
+    setTimeout("newAJAXCommand('/admin/rly.cgi?relay=1',false)", 500);
+  };
+  relay2.onclick = function () {
+    setTimeout("newAJAXCommand('/admin/rly.cgi?relay=2',false)", 500);
+  };
+  relay3.onclick = function () {
+    setTimeout("newAJAXCommand('/admin/rly.cgi?relay=3',false)", 500);
+  };
+  relay4.onclick = function () {
+    setTimeout("newAJAXCommand('/admin/rly.cgi?relay=4',false)", 500);
+  };
+  relay5.onclick = function () {
+    setTimeout("newAJAXCommand('/admin/rly.cgi?relay=5',false)", 500);
+  };
+  relay6.onclick = function () {
+    setTimeout("newAJAXCommand('/admin/rly.cgi?relay=6',false)", 500);
+  };
+
+  function update(xmlData) {
+    var str = getXMLValue(xmlData, "rl14");
+    var statusR1 = str[0];
+    var statusR2 = str[2];
+    var statusR3 = str[4];
+    var statusR4 = str[6];
+    var statusR5 = str[8];
+    var statusR6 = str[10];
+
+    var ind1 = document.getElementById("ind1");
+    var ind2 = document.getElementById("ind2");
+    var ind3 = document.getElementById("ind3");
+    var ind4 = document.getElementById("ind4");
+    var ind5 = document.getElementById("ind5");
+    var ind6 = document.getElementById("ind6");
+
+    if (statusR1 == "1") {
+      ind1.style.backgroundColor = "green";
+    } else {
+      ind1.style.backgroundColor = "";
+    }
+
+    if (statusR2 == "1") {
+      ind2.style.backgroundColor = "green";
+    } else {
+      ind2.style.backgroundColor = "";
+    }
+
+    if (statusR3 == "1") {
+      ind3.style.backgroundColor = "green";
+    } else {
+      ind3.style.backgroundColor = "";
+    }
+
+    if (statusR4 == "1") {
+      ind4.style.backgroundColor = "green";
+    } else {
+      ind4.style.backgroundColor = "";
+    }
+    if (statusR5 == "1") {
+      ind5.style.backgroundColor = "green";
+    } else {
+      ind5.style.backgroundColor = "";
+    }
+    if (statusR6 == "1") {
+      ind6.style.backgroundColor = "green";
+    } else {
+      ind6.style.backgroundColor = "";
+    }
+  }
+  setTimeout("newAJAXCommand('/upr.xml', update, true)", 500);
+  var submitbut = document.getElementById("SubmitBut");
+
+  submitbut.onclick = function () {
+    let arrCheck = "";
+
+    if (document.querySelector("#R1akt").checked) {
+      arrCheck += "1";
+    } else {
+      arrCheck += "0";
+    }
+    arrCheck += ",";
+    if (document.querySelector("#R2akt").checked) {
+      arrCheck += "1";
+    } else {
+      arrCheck += "0";
+    }
+    arrCheck += ",";
+    if (document.querySelector("#R3akt").checked) {
+      arrCheck += "1";
+    } else {
+      arrCheck += "0";
+    }
+    arrCheck += ",";
+    if (document.querySelector("#R4akt").checked) {
+      arrCheck += "1";
+    } else {
+      arrCheck += "0";
+    }
+    arrCheck += ",";
+    if (document.querySelector("#R5akt").checked) {
+      arrCheck += "1";
+    } else {
+      arrCheck += "0";
+    }
+    arrCheck += ",";
+    if (document.querySelector("#R6akt").checked) {
+      arrCheck += "1";
+    } else {
+      arrCheck += "0";
+    }
+
+    const endpoint = `/admin/upr.cgi?upr=${arrCheck}`;
+
+    fetch(endpoint, {
+      method: "POST",
+    })
+      .then((response) => {
+        response.json();
+      })
+      .then((data) => {
+        console.log("Data received:", data);
+      })
+      .catch((error) => {
+        console.error("Error during fetch:", error);
+      });
+  };
+
+  window.onload = function () {
+    activeTab();
+    newAJAXCommand("uconf.xml", pullSavedData, false);
+  };
+  function pullSavedData(xmlData) {
+    var dataSaved = getXMLValue(xmlData, "uconf");
+
+    if (dataSaved[4] == "1") {
+      document.getElementById("R1akt").checked = true;
+    }
+    if (dataSaved[6] == "1") {
+      document.getElementById("R2akt").checked = true;
+    }
+    if (dataSaved[8] == "1") {
+      document.getElementById("R3akt").checked = true;
+    }
+    if (dataSaved[10] == "1") {
+      document.getElementById("R4akt").checked = true;
+    }
+    if (dataSaved[12] == "1") {
+      document.getElementById("R5akt").checked = true;
+    }
+    if (dataSaved[14] == "1") {
+      document.getElementById("R6akt").checked = true;
+    }
+  }
+</script>
+<style>
+  .indication {
+    margin-top: 27px;
+    margin-bottom: 5px;
+    padding: 10px 15px;
+    background-color: white;
+    border: 2px solid;
+    border-radius: 5px;
+    width: 56px;
+    height: 50px;
+  }
+</style>

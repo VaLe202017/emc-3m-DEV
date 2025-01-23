@@ -1,0 +1,19 @@
+~inc:header.inc~
+<div id="content">
+<h1>Device reboot In Progress...</h1>
+
+<p>Your settings were successfully saved, and EDS is now rebooting 
+to configure itself with the new settings.</p>
+
+<p align="center"><b>Your board is now located at: 
+<a href="http://~rebootaddr~/">http://~rebootaddr~/</a></b></p>
+
+</div>
+
+<script language="javascript">
+<!--
+function rebootDummy(x){}
+setTimeout("newAJAXCommand('/admin/reboot.cgi',rebootDummy,false);",500);
+//-->
+</script>
+~inc:footer.inc~

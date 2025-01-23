@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ERM2024</title>
+    <link
+      href="/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script src="/elak.js" type="text/javascript"></script>
+  </head>
+  <body style="background-color: rgb(141, 141, 141)">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fs-3">
+      <div class="container">
+        <a class="navbar-brand" href="http://www.elak.hr/">
+          <img src="/elak_zlatni.png" width="130" height="80" alt="ELAK" />
+        </a>
+        <button
+          class="navbar-toggler d-lg-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/index.htm">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/sat.htm">Time</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/prgm.htm">Program</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/upr.htm">Control</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="/admin/config.htm"
+                >Network <span class="visually-hidden">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/ntp.htm">Sync</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container p-3" id="content" style="background-color: dimgray">
+      <h1
+        class="text-light text-center border border-3 border-danger rounded-3 m-1 mt-2 mb-2 pb-1"
+      >
+        Network settings
+      </h1>
+
+      <div
+        class="p-3 mb-3 m-1 border rounded border-danger border-3 row justify-content-center"
+      >
+        <p class="alert alert-danger text-bg-danger">
+          <b>CAUTION!:</b> Incorrect settings may cause device to lose network
+          connectivity.
+        </p>
+
+        <form
+          method="post"
+          action="/admin/config.htm"
+          class="text-light col col-lg-6"
+          name="config"
+        >
+          <fieldset>
+            <div>
+              <label for="mac" class="form-label">MAC Address:</label
+              ><input
+                type="text"
+                name="mac"
+                class="form-control"
+                value="~config_mac~"
+                disabled
+                readonly
+              />
+            </div>
+            <div>
+              <label for="host" class="form-label">Host Name:</label
+              ><input
+                type="text"
+                class="form-control"
+                name="host"
+                value="~config_hostname~"
+              />
+            </div>
+            <div>&nbsp;</div>
+            <div class="form-check form-switch">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                name="dhcp"
+                value="1"
+                role="switch"
+                onclick="configIPBoxes()"
+                ~config_dhcpchecked~
+              />
+              <label for="dhcp" class="form-check-label">DHCP enable</label>
+            </div>
+            <div>
+              <label for="ip" class="form-label">IP Address:</label>
+
+              <input
+                type="text"
+                class="form-control"
+                name="ip"
+                value="~config_ip~"
+              />
+            </div>
+            <div>
+              <label for="gw" class="form-label">Gateway:</label>
+
+              <input
+                type="text"
+                class="form-control"
+                name="gw"
+                value="~config_gw~"
+              />
+            </div>
+            <div>
+              <label for="sub" class="form-label">Subnet Mask:</label>
+
+              <input
+                type="text"
+                class="form-control"
+                name="sub"
+                value="~config_subnet~"
+              />
+            </div>
+            <div>
+              <label for="dns1" class="form-label">Primary DNS:</label>
+
+              <input
+                type="text"
+                class="form-control"
+                name="dns1"
+                value="~config_dns1~"
+              />
+            </div>
+            <div>
+              <label for="dns2" class="form-label">Secondary DNS:</label
+              ><input
+                type="text"
+                name="dns2"
+                class="form-control"
+                value="~config_dns2~"
+              />
+            </div>
+            <div>
+              <input
+                type="submit"
+                class="btn btn-danger mt-2 w-100"
+                value="Save"
+              />
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+      <!-- Footer -->
+      <div
+        class="text-center text-light border border-3 border-danger rounded-3 pt-2 m-1 mb-2 mt-2"
+      >
+        <p>
+          Copyrights &copy; 2025
+          <a href="http://www.elak.hr/">ELAK d.o.o. KASTAV</a>
+        </p>
+        <p>
+          Frlani 10, HR51215 KASTAV, Hrvatska, Tel: +385 51 320 350,
+          elak@elak.hr
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script language="javascript">
+  //<!--
+  function configIPBoxes() {
+    e = document.forms.config;
+    st = e.dhcp.checked;
+    e.ip.disabled = st;
+    e.gw.disabled = st;
+    e.sub.disabled = st;
+    e.dns1.disabled = st;
+    e.dns2.disabled = st;
+  }
+
+  configIPBoxes();
+  document.getElementById("hello").innerHTML = "~hellomsg~";
+  //-->
+</script>

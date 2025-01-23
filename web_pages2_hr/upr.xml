@@ -1,0 +1,7 @@
+<response>
+<gps>~zadgps~</gps>
+<ntp>~zadntp~</ntp>
+<rl14>~rl14~</rl14>
+<checkGPS>~checkSincronization~</checkGPS>
+<gpsString>~gString~</gpsString>
+</response>

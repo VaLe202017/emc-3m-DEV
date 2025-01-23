@@ -1,0 +1,15 @@
+<response>
+<time>~time~</time>
+<temp>~temp~</temp>
+<sync>~sync~</sync>
+<dat0>~dat(0)~</dat0>
+<dat1>~dat(1)~</dat1>
+<dat2>~dat(2)~</dat2>
+<dat3>~dat(3)~</dat3>
+<dat4>~dat(4)~</dat4>
+<dat5>~dat(5)~</dat5>
+<led0>~led(0)~</led0>
+<led1>~led(1)~</led1>
+<led2>~led(2)~</led2>
+<led3>~led(3)~</led3>
+</response>

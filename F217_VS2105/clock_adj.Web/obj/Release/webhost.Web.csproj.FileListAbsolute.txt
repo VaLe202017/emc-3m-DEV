@@ -1,0 +1,12 @@
+C:\#ISKRA\F\F292_EMC2013S_MASTER\F292_Silverlight\clock_adj.Web\bin\clock_adj.Web.dll.config
+C:\#ISKRA\F\F292_EMC2013S_MASTER\F292_Silverlight\clock_adj.Web\bin\clock_adj.Web.dll
+C:\#ISKRA\F\F292_EMC2013S_MASTER\F292_Silverlight\clock_adj.Web\bin\clock_adj.Web.pdb
+C:\#ISKRA\F\F292_EMC2013S_MASTER\F292_Silverlight\clock_adj.Web\obj\Release\clock_adj.Web.dll
+C:\#ISKRA\F\F292_EMC2013S_MASTER\F292_Silverlight\clock_adj.Web\obj\Release\clock_adj.Web.pdb
+C:\#ISKRA\F\F292_EMC2013S_MASTER\F292_Silverlight\clock_adj.Web\obj\Release\webhost.Web.csprojResolveAssemblyReference.cache
+C:\#ISKRA\F\F210_EDES1760\F210_VS2105\clock_adj.Web\bin\clock_adj.Web.dll.config
+C:\#ISKRA\F\F210_EDES1760\F210_VS2105\clock_adj.Web\bin\clock_adj.Web.dll
+C:\#ISKRA\F\F210_EDES1760\F210_VS2105\clock_adj.Web\bin\clock_adj.Web.pdb
+C:\#ISKRA\F\F210_EDES1760\F210_VS2105\clock_adj.Web\obj\Release\clock_adj.Web.dll
+C:\#ISKRA\F\F210_EDES1760\F210_VS2105\clock_adj.Web\obj\Release\clock_adj.Web.pdb
+C:\#ISKRA\F\F210_EDES1760\F210_VS2105\clock_adj.Web\obj\Release\webhost.Web.csprojResolveAssemblyReference.cache
