@@ -7,19 +7,13 @@
 #define	__MCP_H__
 
 /*-----------------------------------------------------------------------------*/
-void mcp_rly_init(void);
+void mcp_impl_init(void); //impulse init
 
-void mcp_rly1_set(UINT status);
-void mcp_rly2_set(UINT status);
-void mcp_rly3_set(UINT status);
-void mcp_rly4_set(UINT status);
-void mcp_rly5_set(UINT status);
-void mcp_rly6_set(UINT status);
+void mcp_impl1_set(UINT status); //impulse 1
+void mcp_impl2_set(UINT status); //impulse 2
 
-
-
-
-
-
+void mcp_set_polarity_neg1(void); //negative polarity impulse 1
+void mcp_set_polarity_pos1(void); //positive polarity impulse 1
+void mcp_set_polarity_neg2(void); //negative polarity impulse 2
+void mcp_set_polarity_pos2(void); //positive polarity impulse 2
 #endif	/* __MCP_H__ */
-

@@ -29,6 +29,10 @@ static pt_t pt_gps;
 static pt_t pt_ect;
 static pt_t pt_prgm;
 
+static pt_t pt_fault;
+static pt_t pt_impulse1;
+static pt_t pt_impulse2;
+
 static uint16_t ptFlag;
 
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
@@ -43,8 +47,19 @@ void ds_check_new_time(void) {
 }
 
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
-int main(void) {
 
+void rst_pt_imp1(void) {
+    implVar[1].IsFault = 0;
+    PT_INIT(&pt_impulse1);
+}
+
+void rst_pt_imp2(void) {
+    implVar[2].IsFault = 0;
+    PT_INIT(&pt_impulse2);
+}
+/*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
+int main(void) {
+    
     sys_io_init();
     
     AppConfig.ID = 0xFF;
@@ -78,7 +93,7 @@ int main(void) {
     sys_int4_init();
     sys_iic2_init();
     sys_iic3_init();
-    mcp_rly_init();
+    mcp_impl_init();
 
     ds3231_1hz_enable();
     sys_ser5_init();
@@ -88,7 +103,7 @@ int main(void) {
     
     TickInit();                     // Inicijalizacija brojaca vremena
     prgm_init_pt();
-
+          
     for (;;) {
         ClearWDT();
         // service tasks
@@ -100,8 +115,7 @@ int main(void) {
         }
         if(U2STAbits.OERR){  // za clearanje overflowa na serialu ako se desi
 				U2STAbits.OERR = 0;
-        }
-
+        }   
     }
     return (EXIT_SUCCESS);
 }

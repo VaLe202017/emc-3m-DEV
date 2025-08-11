@@ -26,9 +26,9 @@ static UINT8 MCPReg[MCP_BUFSIZE];
 
 
 /*----------------------------------------------------------------------------*/
-void mcp_rly_init(void) {
+void mcp_impl_init(void) {
     rly_mirror = 0x00U;
-    MCPReg[MCP_IODIR] = B8(00000000); // 0 as output
+    MCPReg[MCP_IODIR] = B8(00000000); // 0 as output 1 as input
     MCPReg[MCP_IPOL] = B8(00000000); // reflect the same logic state
     MCPReg[MCP_GPINTEN ] = B8(00000000); // disable int on change
     MCPReg[MCP_DEFVAL] = B8(00000000); //
@@ -43,65 +43,48 @@ void mcp_rly_init(void) {
 }
 
 /*----------------------------------------------------------------------------*/
-void mcp_rly1_set(UINT status) {
+void mcp_impl1_set(UINT status) {
     if (status == 1) {
-        rly_mirror |= BIT_2;
+        rly_mirror |= (1U<<1);
     } else {
-        rly_mirror &= ~BIT_2;
+        rly_mirror &= ~(1U<<1);
+        
     }
-    MCPReg[0] = rly_mirror;
-    sys_iic3_write(MCP_ADDRESS, MCP_GPIO, MCPReg, 1);
+    MCPReg[MCP_GPIO] = rly_mirror;
+    sys_iic3_write(MCP_ADDRESS, MCP_GPIO, &MCPReg[MCP_GPIO], 1);
 }
 /*----------------------------------------------------------------------------*/
-void mcp_rly2_set(UINT status) {
+void mcp_impl2_set(UINT status) {
     if (status == 1) {
-        rly_mirror |= BIT_3;
+        rly_mirror |= (1U<<5);
     } else {
-        rly_mirror &= ~BIT_3;
+        rly_mirror &= ~(1U<<5);
     }
-    MCPReg[0] = rly_mirror;
-    sys_iic3_write(MCP_ADDRESS, MCP_GPIO, MCPReg, 1);
+    MCPReg[MCP_GPIO] = rly_mirror;
+    sys_iic3_write(MCP_ADDRESS, MCP_GPIO, &MCPReg[MCP_GPIO], 1);
 }
 /*----------------------------------------------------------------------------*/
-void mcp_rly3_set(UINT status) {
-    if (status == 1) {
-        rly_mirror |= BIT_4;
-    } else {
-        rly_mirror &= ~BIT_4;
-    }
-    MCPReg[0] = rly_mirror;
-    sys_iic3_write(MCP_ADDRESS, MCP_GPIO, MCPReg, 1);
+void mcp_set_polarity_neg1(void) {
+    INT_LOCK;
+    mcp_impl1_set(0);
+    INT_UNLOCK;
 }
 /*----------------------------------------------------------------------------*/
-void mcp_rly4_set(UINT status) {
-    if (status == 1) {
-        rly_mirror |= BIT_5;
-    } else {
-        rly_mirror &= ~BIT_5;
-    }
-    MCPReg[0] = rly_mirror;
-    sys_iic3_write(MCP_ADDRESS, MCP_GPIO, MCPReg, 1);
+void mcp_set_polarity_pos1(void) {
+    INT_LOCK;
+    mcp_impl1_set(1);
+    INT_UNLOCK;
 }
 /*----------------------------------------------------------------------------*/
-void mcp_rly5_set(UINT status) {
-    if (status == 1) {
-        rly_mirror |= BIT_7;
-    } else {
-        rly_mirror &= ~BIT_7;
-    }
-    MCPReg[0] = rly_mirror;
-    sys_iic3_write(MCP_ADDRESS, MCP_GPIO, MCPReg, 1);
+void mcp_set_polarity_neg2(void) {
+    INT_LOCK;
+    mcp_impl2_set(0);
+    INT_UNLOCK;
 }
 /*----------------------------------------------------------------------------*/
-void mcp_rly6_set(UINT status) {
-    if (status == 1) {
-        rly_mirror |= BIT_6;
-    } else {
-        rly_mirror &= ~BIT_6;
-    }
-    MCPReg[0] = rly_mirror;
-    sys_iic3_write(MCP_ADDRESS, MCP_GPIO, MCPReg, 1);
+void mcp_set_polarity_pos2(void) {
+    INT_LOCK;
+    mcp_impl2_set(1);
+    INT_UNLOCK;
 }
-
-
 /*----------------------------------------------------------------------------*/

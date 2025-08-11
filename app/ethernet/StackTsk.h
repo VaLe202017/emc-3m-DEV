@@ -54,6 +54,23 @@ typedef struct { //__attribute__((__packed__)) {
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 
 typedef struct {
+    UINT isEnabled; //0 is not enabled  1 is enabled
+    UINT implMode; // 0 if second movment 1 if miniutes movments.
+    INT timeZone; // relative to GMT
+    UINT dayLight; // 1 is active 0 is not active
+    UINT implLength; // in milliseconds time on voltage in both directions
+} IMPL_SET;
+
+typedef struct {
+    UINT IsFault;
+    UINT time; // seconds in 12 hours 43200
+    UINT ticks; // seconds ticks in 12 hours 43200
+    UINT polarity; // 1 positivni 2 negativni
+} IMPL_VAR;
+
+#define IMPL_NUM 9  // 0 is not used 1 and 2 for I1 and I2  else for outside
+
+typedef struct {
     UINT flashCounter;
 
     UINT8 ID;
@@ -70,7 +87,8 @@ typedef struct {
     UINT TSSmplPrd; /* app_temp settings*/
     UINT TSSmplNum;
     
-    
+    IMPL_SET implSet[IMPL_NUM];
+
     UINT implMinPause;
     UINT implSecPause;
 

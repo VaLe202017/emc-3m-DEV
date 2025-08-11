@@ -74,6 +74,11 @@ bool gprmc_gps_checkBuffer(cmndBuf_t * ser);
 uint8_t gprmc_gps_isValid();
 
 /* sat.c */
+void ds_setPos_3();
+void ds_getPos_3();
+void ds_setPos_4();
+void ds_getPos_4();
+
 void sat_datetime_init(datumvrijeme_t *src);
 void sat_set_danutjednu(datumvrijeme_t *src);
 void sat_adjust_timezone(datumvrijeme_t *src, int8_t timezone);

@@ -57,7 +57,7 @@ void spi_open_zvono(void) {
     SPI2STAT = B32(0b00000000, 0b00000000, 0b00000000, 0b00000000);
     SPI2CON = B32(0b00000000, 0b00000000, 0b10000010, 0b00100000);
 } 
-
+/*
 void spi_put_zvono(UINT data) {
     spi_open_zvono();
     BEEP_SET; //RLY_CS_CLR;
@@ -68,5 +68,5 @@ void spi_put_zvono(UINT data) {
     BEEP_CLR; //RLY_CS_SET;
     return;
 }
-
+*/
 

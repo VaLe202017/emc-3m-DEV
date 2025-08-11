@@ -50,6 +50,8 @@
 #include "app/zvono.h"
 #include "app/cgi.h"
 
+#include "impulse/impulseH.h"
+
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 APP_EXT float gTSAvgVal;
 APP_EXT datumvrijeme_t vrijeme;
@@ -70,7 +72,7 @@ static cmndBuf_t webBuf[GPS_QUEUE_SIZE];
 
 /*----------------------------------------------------------------------------*/
 #define FIRMWARE_VERSION        "V1.0"
-#define MY_DEFAULT_HOST_NAME    "ERM-3M"
+#define MY_DEFAULT_HOST_NAME    "EMC-3M dev"
 #define APP_VERSION              01
 #define APP_TYPE                MY_DEFAULT_HOST_NAME 
 
@@ -186,5 +188,13 @@ void drv_eds_hhmm_hex_set(uint8_t hh, uint8_t mm);
 void drv_eds_gprmc_set(uint8_t znak, uint8_t valid);
 void drv_eds_timer_set();
 
+/*impulse*/
+void rst_pt_imp1();
+void rst_pt_imp2();
+
+APP_EXT datumvrijeme_t vrijeme;
+APP_EXT datumvrijeme_t vrijemeI1;
+APP_EXT datumvrijeme_t vrijemeI2;
+APP_EXT datumvrijeme_t rlyVrijeme;
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 #endif // _APP_H_

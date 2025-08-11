@@ -12,18 +12,21 @@
 
 static INT32 program1;
 static INT32 program2;
+
 static INT32 program3;
 static INT32 program4;
 static INT32 program5;
 static INT32 program6;
 
+
 static INT32 signal1;
 static INT32 signal2;
+/*
 static INT32 signal3;
 static INT32 signal4;
 static INT32 signal5;
 static INT32 signal6;
-
+*/
 
 
 static uint32_t clockTime;
@@ -71,6 +74,7 @@ static void prgm_set_relay(INT32 rl) {
     case 2:
       gSignal2 = signal2;
       break;
+      /*
     case 3:
       gSignal3 = signal3;
       break;
@@ -83,6 +87,7 @@ static void prgm_set_relay(INT32 rl) {
     case 6:
       gSignal6 = signal6;
       break;
+      */
     default:
       break;
   }
@@ -128,7 +133,7 @@ PT_THREAD(prgm_task(pt_t *pt)) {
         }
       }
     }
-
+/*
     if (AppConfig.relay3IsEnabled == 1) {
       program3 = prgm_find_program(__PRGM, 3, &rlyVrijeme);
       if ((program3 > -1) && (program3 < 100)) {
@@ -166,6 +171,7 @@ PT_THREAD(prgm_task(pt_t *pt)) {
         }
       }
     }
+ */
 
   }
   PT_END(pt);
@@ -174,10 +180,13 @@ PT_THREAD(prgm_task(pt_t *pt)) {
 static pt_t pt_prgm;
 static pt_t pt_zv1;
 static pt_t pt_zv2;
-static pt_t pt_zv3;
+/*
+ static pt_t pt_zv3;
 static pt_t pt_zv4;
 static pt_t pt_zv5;
 static pt_t pt_zv6;
+ */
+
 
 
 void prgm_init_pt(void) {
@@ -185,17 +194,23 @@ void prgm_init_pt(void) {
   PT_INIT(&pt_prgm);
   PT_INIT(&pt_zv1);
   PT_INIT(&pt_zv2);
-  PT_INIT(&pt_zv3);
+  /*
+   PT_INIT(&pt_zv3);
   PT_INIT(&pt_zv4);
   PT_INIT(&pt_zv5);
   PT_INIT(&pt_zv6);
+   */
+  
   gPRGMValid = false;
   ZVN_clr(ZVONO1);
   ZVN_clr(ZVONO2);
+  /*
   ZVN_clr(ZVONO3);
   ZVN_clr(ZVONO4);
   ZVN_clr(ZVONO5);
   ZVN_clr(ZVONO6);
+   */
+  
   gPRGMStatus = true;
   
 }
@@ -206,10 +221,11 @@ void prgm_run_pt(void) {
         prgm_task(&pt_prgm);
         zvono1_task(&pt_zv1);
         zvono2_task(&pt_zv2);
+        /*
         zvono3_task(&pt_zv3);
         zvono4_task(&pt_zv4);
         zvono5_task(&pt_zv5);
-        zvono6_task(&pt_zv6);
+        zvono6_task(&pt_zv6);*/
   } 
 
 }

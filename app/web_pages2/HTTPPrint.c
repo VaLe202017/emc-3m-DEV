@@ -444,6 +444,8 @@ void HTTPPrint_cloSel(WORD type, WORD value) {
             break;
         case 11: col = (uint8_t) AppConfig.relay1IsEnabled;
             break;
+        case 12: col = (uint8_t) AppConfig.relay2IsEnabled;
+            break;
     }
     if (col == value) {
         TCPPutROMString(sktHTTP, (ROM uint8_t *) "SELECTED");
