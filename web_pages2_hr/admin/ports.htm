@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Port Usage Viewer</title>
+</head>
+<body>
+    <h1>Check browser console for port usage</h1>
+
+    <script>
+        // Simulate port usage display
+        function printPortUsage() {
+            console.log("=== Port Usage Summary ===");
+
+            console.log("PORTA:");
+            console.log("  Inputs : MCP_INT");
+            console.log("  Outputs: ETH_PDOWN, DIR2");
+
+            console.log("PORTB:");
+            console.log("  Inputs : FLT1, FLT2");
+
+            console.log("PORTC:");
+            console.log("  No active inputs/outputs");
+
+            console.log("PORTD:");
+            console.log("  Inputs : DS_INT");
+            console.log("  Outputs: RLY1, RLY2, OE2 (buzzer)");
+
+            console.log("PORTE:");
+            console.log("  No active inputs/outputs");
+
+            console.log("PORTF:");
+            console.log("  Inputs : SER2RX, SER5RX");
+            console.log("  Outputs: DIR1, SER2TX, SER5TX");
+
+            console.log("PORTG:");
+            console.log("  No active inputs/outputs");
+
+            console.log("==========================");
+        }
+
+        printPortUsage();
+    </script>
+</body>
+</html>
