@@ -43,7 +43,7 @@ void app_ethernet_init(void) {
 }
 
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
-/*
+
 void ds_check_new_time(void) {
     if (gMinuitFlag > 0) {
         ds3231_time_get(&vrijeme);
@@ -53,7 +53,7 @@ void ds_check_new_time(void) {
         gMinuitFlag = 0;
         INT_UNLOCK;
     }
-}*/
+}
 
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 
@@ -71,16 +71,6 @@ void rst_pt_device(void) {
     PT_INIT(&pt_device);
 }
 
-void ds_check_new_time(void) {
-    if (gMinuitFlag) {
-        ds3231_time_get(&vrijeme);  // safe here
-        sat_toLocal(&vrijeme, AppConfig.ClockTimeZone, AppConfig.ClockDayLightSaving);
-        if (AppConfig.ClockTimeFormat == TIMEFORMAT_12H) vrijeme.sat %= 12;
-        impl_time_get(1, &vrijeme, &vrijemeI1);
-        impl_time_get(2, &vrijeme, &vrijemeI2);
-        INT_LOCK; gMinuitFlag = 0; INT_UNLOCK;
-    }
-}
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 int main(void) {
     
@@ -105,7 +95,7 @@ int main(void) {
     sat_datetime_init(&vrijeme);
     
     gMinuitFlag = 1;
-    ds_check_new_time();
+    
         
     
     ectState = ECT_CLOCK;
@@ -137,7 +127,9 @@ int main(void) {
     rst_pt_device();
     rst_pt_imp1();
     rst_pt_imp2();
-    //implWaitSem = 0;
+   implWaitSem = 0;
+   
+   ds_check_new_time(); //tu je greska u ovoj funkciji
    
     for (;;) {
         ClearWDT();
