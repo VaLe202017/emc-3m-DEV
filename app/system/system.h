@@ -42,6 +42,14 @@
 #define SER4_IPL        5
 #define	SER4_SIPL       1
 
+#define SYS_INT0_IPL    5
+#define SYS_INT0_SIPL   1
+
+/*----------------------------------------------------------------------------*/
+
+//extern volatile UINT gMinuitFlag;
+
+//#define CLOCK_UPDATE_FROM_DS gMinuitFlag++
 
 /*----------------------------------------------------------------------------*/
 /* system_iic2.c */

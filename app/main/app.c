@@ -32,6 +32,8 @@ static pt_t pt_prgm;
 static pt_t pt_fault;
 static pt_t pt_impulse1;
 static pt_t pt_impulse2;
+static pt_t pt_device;
+volatile UINT gMinuitFlag=0;
 
 static uint16_t ptFlag;
 
@@ -41,10 +43,17 @@ void app_ethernet_init(void) {
 }
 
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
-
+/*
 void ds_check_new_time(void) {
-    ds3231_time_get(&vrijeme);
-}
+    if (gMinuitFlag > 0) {
+        ds3231_time_get(&vrijeme);
+        impl_time_get(1, &vrijeme, &vrijemeI1);
+        impl_time_get(2, &vrijeme, &vrijemeI2);
+        INT_LOCK;
+        gMinuitFlag = 0;
+        INT_UNLOCK;
+    }
+}*/
 
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 
@@ -56,6 +65,21 @@ void rst_pt_imp1(void) {
 void rst_pt_imp2(void) {
     implVar[2].IsFault = 0;
     PT_INIT(&pt_impulse2);
+}
+
+void rst_pt_device(void) {
+    PT_INIT(&pt_device);
+}
+
+void ds_check_new_time(void) {
+    if (gMinuitFlag) {
+        ds3231_time_get(&vrijeme);  // safe here
+        sat_toLocal(&vrijeme, AppConfig.ClockTimeZone, AppConfig.ClockDayLightSaving);
+        if (AppConfig.ClockTimeFormat == TIMEFORMAT_12H) vrijeme.sat %= 12;
+        impl_time_get(1, &vrijeme, &vrijemeI1);
+        impl_time_get(2, &vrijeme, &vrijemeI2);
+        INT_LOCK; gMinuitFlag = 0; INT_UNLOCK;
+    }
 }
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 int main(void) {
@@ -78,6 +102,12 @@ int main(void) {
     ZVN_Init();
     
 
+    sat_datetime_init(&vrijeme);
+    
+    gMinuitFlag = 1;
+    ds_check_new_time();
+        
+    
     ectState = ECT_CLOCK;
     //services
     PT_INIT(&pt_ethernet);
@@ -99,17 +129,23 @@ int main(void) {
     sys_ser5_init();
     sys_ser2_init();
 
-    sys_t1_init();
+    sys_t1_init();                  
     
     TickInit();                     // Inicijalizacija brojaca vremena
     prgm_init_pt();
-          
+    
+    rst_pt_device();
+    rst_pt_imp1();
+    rst_pt_imp2();
+    //implWaitSem = 0;
+   
     for (;;) {
         ClearWDT();
         // service tasks
         ethernet_task(&pt_ethernet);
         app_cmndW(&pt_cmndW);
         prgm_run_pt();
+        ds_check_new_time();
         if(U5STAbits.OERR){  // za clearanje overflowa na serialu ako se desi
 				U5STAbits.OERR = 0;
         }

@@ -196,5 +196,7 @@ APP_EXT datumvrijeme_t vrijeme;
 APP_EXT datumvrijeme_t vrijemeI1;
 APP_EXT datumvrijeme_t vrijemeI2;
 APP_EXT datumvrijeme_t rlyVrijeme;
+
+extern volatile UINT gMinuitFlag;
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 #endif // _APP_H_
