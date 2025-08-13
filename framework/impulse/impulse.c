@@ -21,71 +21,39 @@
 
 
 /*----------------------------------------------------------------------------*/
-/*
-static void impl_il1_set(UINT state) {
-    switch (state) {
-        case IMP_POZ:
-            impl234 |= IN_P4;
-            impl234 &= ~IN_N4;
-            break;
-        case IMP_NEG:
-            impl234 |= IN_P4;
-            impl234 |= IN_N4;
-            break;
-        case IMP_LOP:
-            impl234 &= ~IN_P4;
-            impl234 |= IN_N4;
-            break;
-        case IMP_BRK:
-            impl234 &= ~IN_P4;
-            impl234 &= ~IN_N4;
-            break;
-        default:
-            break;
-    }
-}
-static void impl_il2_set(UINT state) {
-    switch (state) {
-        case IMP_POZ:
-            impl234 |= IN_P3;
-            impl234 &= ~IN_N3;
-            break;
-        case IMP_NEG:
-            impl234 |= IN_P3;
-            impl234 |= IN_N3;
-            break;
-        case IMP_LOP:
-            impl234 &= ~IN_P3;
-            impl234 |= IN_N3;
-            break;
-        case IMP_BRK:
-            impl234 &= ~IN_P3;
-            impl234 &= ~IN_N3;
-            break;
-        default:
-            break;
-    }
-}*/
 
 static void impl_il1_set(UINT state) {
     switch (state) {
         case IMP_POZ:
-            mcp_impl1_set(1);
+            mcp_set_polarity_pos1();
             break;
         case IMP_NEG:
-            mcp_impl1_set(0);
+            mcp_set_polarity_neg1();
+            break;
+        case IMP_LOP:
+            mcp_set_polarity_lop1();
+            break;
+        case IMP_BRK:
+            mcp_set_polarity_brk1();
             break;
         default:
             break;
     }
 }
+
 static void impl_il2_set(UINT state) {
     switch (state) {
         case IMP_POZ:
-            mcp_impl2_set(1);
+            mcp_set_polarity_pos2();
             break;
         case IMP_NEG:
-            mcp_impl2_set(0);
+            mcp_set_polarity_neg2();
+            break;
+        case IMP_BRK:
+            mcp_set_polarity_brk2();
+            break;
+        case IMP_LOP:
+            mcp_set_polarity_lop2();
             break;
         default:
             break;
@@ -109,14 +77,6 @@ void impl_il16_set(UINT indx, UINT state) {
     //spi_put_impl(impl234,impl165);
 }
 
-/*----------------------------------------------------------------------------*/
-/*
-void impl_il16_reset() {
-    impl165 = 0x00U;
-    impl234 = 0x00U;
-    spi_put_impl(impl234,impl165);
-}
-*/
 /*----------------------------------------------------------------------------*/
 void impl_time_get(UINT indx, const datumvrijeme_t *time, datumvrijeme_t* dt) {
     INT i;

@@ -80,55 +80,53 @@ static uint8_t bin2bcd(uint8_t bin) {
 #define DS3232_SRAM_I8H        DS3232_SRAM_I7H +4U
 
 /*----------------------------------------------------------------------------*/
-void ds_getPos_3(void) {
+void ds_getPos_1(void) {
     UINT8 minuta, sat, sec;
-    sys_iic2_read(DS3231_ADDRESS, DS3232_SRAM_I3H, DS32Reg, 4);
-    sec = DS32Reg[0];
-    minuta = DS32Reg[1];
-    sat = DS32Reg[2];
-    implVar[3].polarity = DS32Reg[3];
-    implVar[3].ticks = (sat * 3600UL) + (minuta * 60) + sec;
+    sys_iic2_read(DS3231_ADDRESS, DS3231_REG_AL1_SECOND, DS32Reg, 4);
+    sec = bcd2bin(DS32Reg[0] & 0x7FU);
+    minuta = bcd2bin(DS32Reg[1] & 0x7FU);
+    sat = bcd2bin(DS32Reg[2] & 0x3FU);
+    implVar[1].polarity = bcd2bin(DS32Reg[3] & 0x0FU);
+    implVar[1].ticks = (sat * 3600UL) + (minuta * 60) + sec;
 }
 
-void ds_setPos_3(void) {
+void ds_setPos_1(void) {
     UINT8 hours, miniutes, seconds, polarity;
     UINT ticks;
-    ticks = implVar[3].ticks;
+    ticks = implVar[1].ticks;
     hours = ticks / 3600UL;
     miniutes = (ticks - (hours * 3600UL)) / 60U;
     seconds = ticks - ((hours * 3600UL) + (miniutes * 60U));
-    DS32Reg[0] = seconds;
-    DS32Reg[1] = miniutes;
-    DS32Reg[2] = hours;
-    polarity = (UINT8) implVar[3].polarity;
-    DS32Reg[3] = polarity;
-    sys_iic2_write(DS3231_ADDRESS, DS3232_SRAM_I3H, DS32Reg, 4);
+    DS32Reg[0] = bin2bcd(seconds) & 0x7FU;
+    DS32Reg[1] = bin2bcd(miniutes) & 0x7FU; //minuits
+    DS32Reg[2] = bin2bcd(hours) & 0x3F; //hours
+    polarity = (UINT8) implVar[1].polarity;
+    DS32Reg[3] = bin2bcd(polarity) & 0x0FU; // polarity
+    sys_iic2_write(DS3231_ADDRESS, DS3231_REG_AL1_SECOND, DS32Reg, 4);
 }
 
 /*----------------------------------------------------------------------------*/
-void ds_getPos_4(void) {
+void ds_getPos_2(void) {
     UINT8 minuta, sat, sec;
-    sys_iic2_read(DS3231_ADDRESS, DS3232_SRAM_I4H, DS32Reg, 4);
-    sec = DS32Reg[0];
-    minuta = DS32Reg[1];
-    sat = DS32Reg[2];
-    implVar[4].polarity = DS32Reg[3];
-    implVar[4].ticks = (sat * 3600UL) + (minuta * 60) + sec;
+    sys_iic2_read(DS3231_ADDRESS, DS3231_REG_AL2_MIN, DS32Reg, 3);
+    sec = 0;
+    minuta = bcd2bin(DS32Reg[0] & 0x7FU);
+    sat = bcd2bin(DS32Reg[1] & 0x3FU);
+    implVar[2].polarity = bcd2bin(DS32Reg[2] & 0x0FU);
+    implVar[2].ticks = (sat * 3600UL) + (minuta * 60) + sec;
 }
 
-void ds_setPos_4(void) {
-    UINT8 hours, miniutes, seconds, polarity;
+void ds_setPos_2(void) {
+    UINT8 hours, miniutes, polarity;
     UINT ticks;
-    ticks = implVar[4].ticks;
+    ticks = implVar[2].ticks;
     hours = ticks / 3600UL;
     miniutes = (ticks - (hours * 3600UL)) / 60U;
-    seconds = ticks - ((hours * 3600UL) + (miniutes * 60U));
-    DS32Reg[0] = seconds;
-    DS32Reg[1] = miniutes;
-    DS32Reg[2] = hours;
-    polarity = (UINT8) implVar[4].polarity;
-    DS32Reg[3] = polarity;
-    sys_iic2_write(DS3231_ADDRESS, DS3232_SRAM_I4H, DS32Reg, 4);
+    DS32Reg[0] = bin2bcd(miniutes) & 0x7FU; //minuits
+    DS32Reg[1] = bin2bcd(hours) & 0x3F; //hours
+    polarity = (UINT8) implVar[2].polarity;
+    DS32Reg[2] = bin2bcd(polarity) & 0x0FU; // polarity
+    sys_iic2_write(DS3231_ADDRESS, DS3231_REG_AL2_MIN, DS32Reg, 3);
 }
 
 /*----------------------------------------------------------------------------*/

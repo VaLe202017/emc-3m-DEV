@@ -33,7 +33,7 @@ static pt_t pt_fault;
 static pt_t pt_impulse1;
 static pt_t pt_impulse2;
 static pt_t pt_device;
-volatile UINT gMinuitFlag=0;
+volatile UINT gMinuitFlag = 0;
 
 static uint16_t ptFlag;
 
@@ -73,40 +73,40 @@ void rst_pt_device(void) {
 
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 int main(void) {
-    
+
     sys_io_init();
-    
+
     AppConfig.ID = 0xFF;
-    
+
     cmndW_data_int();
 
     AppState = APSM_CLOCK;
-    
+
     sat_datetime_init(&rlyVrijeme);
     sat_datetime_init(&gZadSinkroGPS);
     sat_datetime_init(&gprmcTime);
     sat_datetime_init(&gZadSinkroNTP);
-    
+
     //app_defaults_load();
     app_settings_load();
     ZVN_Init();
-    
+
 
     sat_datetime_init(&vrijeme);
-    
+
     gMinuitFlag = 1;
-    
-        
-    
+
+
+
     ectState = ECT_CLOCK;
     //services
     PT_INIT(&pt_ethernet);
     PT_INIT(&pt_sat);
     PT_INIT(&pt_cmndW);
-    
+
     //display
     PT_INIT(&pt_clock);
-   
+
     PT_INIT(&pt_gps);
     PT_INIT(&pt_prgm);
 
@@ -119,18 +119,27 @@ int main(void) {
     sys_ser5_init();
     sys_ser2_init();
 
-    sys_t1_init();                  
-    
-    TickInit();                     // Inicijalizacija brojaca vremena
+    sys_t1_init();
+
+    TickInit(); // Inicijalizacija brojaca vremena
     prgm_init_pt();
-    
+
     rst_pt_device();
     rst_pt_imp1();
     rst_pt_imp2();
-   implWaitSem = 0;
-   
-   ds_check_new_time(); //tu je greska u ovoj funkciji
-   
+    implWaitSem = 0;
+
+    AppConfig.implSet[1].isEnabled = 1;
+    AppConfig.implSet[2].isEnabled = 1;
+    AppConfig.implSet[1].implMode = 0; // seconds-based
+    AppConfig.implSet[2].implMode = 0;
+    AppConfig.implSet[1].implLength = 5; // some non-zero pulse length (units = your Tick divisor)
+    AppConfig.implSet[2].implLength = 5;
+    AppConfig.implSet[1].timeZone = 1;
+    AppConfig.implSet[2].timeZone = 1;
+
+    ds_check_new_time();
+
     for (;;) {
         ClearWDT();
         // service tasks
@@ -138,12 +147,15 @@ int main(void) {
         app_cmndW(&pt_cmndW);
         prgm_run_pt();
         ds_check_new_time();
-        if(U5STAbits.OERR){  // za clearanje overflowa na serialu ako se desi
-				U5STAbits.OERR = 0;
+        impl_task_1(&pt_impulse1);
+        impl_task_2(&pt_impulse2);
+        ds_check_new_time();
+        if (U5STAbits.OERR) { // za clearanje overflowa na serialu ako se desi
+            U5STAbits.OERR = 0;
         }
-        if(U2STAbits.OERR){  // za clearanje overflowa na serialu ako se desi
-				U2STAbits.OERR = 0;
-        }   
+        if (U2STAbits.OERR) { // za clearanje overflowa na serialu ako se desi
+            U2STAbits.OERR = 0;
+        }
     }
     return (EXIT_SUCCESS);
 }

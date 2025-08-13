@@ -43,19 +43,34 @@ void mcp_impl_init(void) {
 }
 
 /*----------------------------------------------------------------------------*/
-void mcp_impl1_set(UINT status) {
-    if (status == 1) {
+void mcp_impl1_set(UINT status0, UINT status1) {
+    if (status1) {
+        //bit_0 je in1-1 bit_1 je in2-1
         rly_mirror |= (1U<<1);
     } else {
         rly_mirror &= ~(1U<<1);
+        
+    }
+    if (status0) {
+        //bit_0 je in1-1 bit_1 je in2-1
+        rly_mirror |= (1U<<0);
+    } else {
+        rly_mirror &= ~(1U<<0);
         
     }
     MCPReg[MCP_GPIO] = rly_mirror;
     sys_iic3_write(MCP_ADDRESS, MCP_GPIO, &MCPReg[MCP_GPIO], 1);
 }
 /*----------------------------------------------------------------------------*/
-void mcp_impl2_set(UINT status) {
-    if (status == 1) {
+void mcp_impl2_set(UINT status4, UINT status5) {
+    if (status4 == 1) {
+        //bit_4 je in1-2 bit_5 je in2-2
+        rly_mirror |= (1U<<4);
+    } else {
+        rly_mirror &= ~(1U<<4);
+    }
+    if (status5 == 1) {
+        //bit_4 je in1-2 bit_5 je in2-2
         rly_mirror |= (1U<<5);
     } else {
         rly_mirror &= ~(1U<<5);
@@ -66,25 +81,49 @@ void mcp_impl2_set(UINT status) {
 /*----------------------------------------------------------------------------*/
 void mcp_set_polarity_neg1(void) {
     INT_LOCK;
-    mcp_impl1_set(0);
+    mcp_impl1_set(0,1);
     INT_UNLOCK;
 }
 /*----------------------------------------------------------------------------*/
 void mcp_set_polarity_pos1(void) {
     INT_LOCK;
-    mcp_impl1_set(1);
+    mcp_impl1_set(1,0);
+    INT_UNLOCK;
+}
+/*----------------------------------------------------------------------------*/
+void mcp_set_polarity_brk1(void) {
+    INT_LOCK;
+    mcp_impl1_set(1,1);
+    INT_UNLOCK;
+}
+/*----------------------------------------------------------------------------*/
+void mcp_set_polarity_lop1(void) {
+    INT_LOCK;
+    mcp_impl1_set(0,0);
     INT_UNLOCK;
 }
 /*----------------------------------------------------------------------------*/
 void mcp_set_polarity_neg2(void) {
     INT_LOCK;
-    mcp_impl2_set(0);
+    mcp_impl2_set(0,1);
     INT_UNLOCK;
 }
 /*----------------------------------------------------------------------------*/
 void mcp_set_polarity_pos2(void) {
     INT_LOCK;
-    mcp_impl2_set(1);
+    mcp_impl2_set(1,0);
+    INT_UNLOCK;
+}
+/*----------------------------------------------------------------------------*/
+void mcp_set_polarity_brk2(void) {
+    INT_LOCK;
+    mcp_impl2_set(1,1);
+    INT_UNLOCK;
+}
+/*----------------------------------------------------------------------------*/
+void mcp_set_polarity_lop2(void) {
+    INT_LOCK;
+    mcp_impl2_set(0,0);
     INT_UNLOCK;
 }
 /*----------------------------------------------------------------------------*/
