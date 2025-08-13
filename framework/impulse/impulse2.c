@@ -6,10 +6,10 @@
 
 #define IMPL_INDX 2
 
-#define IMPL_NEG        impl_il16_set(IMPL_INDX, IMP_NEG);
-#define IMPL_POZ        impl_il16_set(IMPL_INDX, IMP_POZ);
-#define IMPL_BRK        impl_il16_set(IMPL_INDX, IMP_BRK);
-#define IMPL_LOP        impl_il16_set(IMPL_INDX, IMP_LOP);
+#define IMPL_NEG        mcp_set_polarity_neg2();
+#define IMPL_POZ        mcp_set_polarity_pos2();
+#define IMPL_BRK        mcp_set_polarity_brk2();
+#define IMPL_LOP        mcp_set_polarity_lop2();
 
 #define IMPL_RTY_SET    IMPL_LOP //XCAT(XCAT(IMPL_RTY_SET_, ),IMPL_INDX)
 #define IMPL_RTY_CLR    IMPL_LOP //XCAT(XCAT(IMPL_RTY_CLR_, ),IMPL_INDX)
