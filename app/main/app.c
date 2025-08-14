@@ -80,19 +80,17 @@ int main(void) {
 
     cmndW_data_int();
 
-    AppState = APSM_CLOCK;
-
-    sat_datetime_init(&rlyVrijeme);
-    sat_datetime_init(&gZadSinkroGPS);
-    sat_datetime_init(&gprmcTime);
-    sat_datetime_init(&gZadSinkroNTP);
-
     //app_defaults_load();
     app_settings_load();
     ZVN_Init();
 
+    AppState = APSM_CLOCK;
 
     sat_datetime_init(&vrijeme);
+    sat_datetime_init(&rlyVrijeme);
+    sat_datetime_init(&gZadSinkroGPS);
+    sat_datetime_init(&gprmcTime);
+    sat_datetime_init(&gZadSinkroNTP);
 
     gMinuitFlag = 1;
 
@@ -137,8 +135,7 @@ int main(void) {
     AppConfig.implSet[2].implLength = 5U;
     AppConfig.implSet[1].timeZone = 1;
     AppConfig.implSet[2].timeZone = 1;
-    AppConfig.gpsIsEnabled=1;
-    //implVar[1].ticks=0;
+    AppConfig.gpsIsEnabled = 1;
     
     ds_check_new_time();
 
