@@ -192,7 +192,7 @@ void drv_eds_timer_set();
 void rst_pt_imp1();
 void rst_pt_imp2();
 
-APP_EXT datumvrijeme_t vrijeme;
+//APP_EXT datumvrijeme_t vrijeme;
 APP_EXT datumvrijeme_t vrijemeI1;
 APP_EXT datumvrijeme_t vrijemeI2;
 APP_EXT datumvrijeme_t rlyVrijeme;

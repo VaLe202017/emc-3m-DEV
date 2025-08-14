@@ -41,6 +41,15 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Leon/Desktop/za%20EMC-3M/LEON/EMC-3M%20dev%20s%20gita/emc-3m-DEV/app/cgi.c</file>
+            <file>file:/C:/Users/Leon/Desktop/za%20EMC-3M/LEON/EMC-3M%20dev%20s%20gita/emc-3m-DEV/framework/impulse/impulse.c</file>
+            <file>file:/C:/Users/Leon/Desktop/za%20EMC-3M/LEON/EMC-3M%20dev%20s%20gita/emc-3m-DEV/framework/sat/sat.c</file>
+            <file>file:/C:/Users/Leon/Desktop/za%20EMC-3M/LEON/EMC-3M%20dev%20s%20gita/emc-3m-DEV/app/main/app.c</file>
+            <file>file:/C:/Users/Leon/Desktop/za%20EMC-3M/LEON/EMC-3M%20dev%20s%20gita/emc-3m-DEV/framework/impulse/impulse1.c</file>
+            <file>file:/C:/Users/Leon/Desktop/za%20EMC-3M/LEON/EMC-3M%20dev%20s%20gita/emc-3m-DEV/framework/impulse/impulseH.h</file>
+            <file>file:/C:/Users/Leon/Desktop/za%20EMC-3M/LEON/EMC-3M%20dev%20s%20gita/emc-3m-DEV/app/ethernet/StackTsk.h</file>
+            <file>file:/C:/Users/Leon/Desktop/za%20EMC-3M/LEON/EMC-3M%20dev%20s%20gita/emc-3m-DEV/app/ethernet/custom_http_app.c</file>
+        </group>
     </open-files>
 </project-private>

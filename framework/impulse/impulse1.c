@@ -24,16 +24,6 @@
 #define _IS_CUR_LIMIT   (pVar->IsFault == 1)
 #define _IS_CUR_OK      (pVar->IsFault == 0)
 
-/* ==== minimal timeout helper: uses only ONE PT macro ==== */
-#ifndef IMPL_RUN_TIMEOUT_TICKS
-#define IMPL_RUN_TIMEOUT_TICKS  (AppConfig.implSecPause)
-#endif
-#define PT_WAIT_UNTIL_OR_TIMEOUT(pt, cond, startTick, timeoutTicks)          \
-do {                                                                          \
-    DWORD __t0 = (startTick);                                                 \
-    PT_WAIT_UNTIL((pt), (cond) || pt_is_dly_end(__t0, (timeoutTicks)));       \
-} while (0)
-/* ======================================================== */
 
 static DWORD imp_time;
 static IMPL_SET * pSet;
@@ -42,70 +32,61 @@ static volatile IMPL_VAR * pVar;
 
 /*----------------------------------------------------------------------------*/
 PT_THREAD(IMPL_TASK(pt_t *pt)) {
-    PT_BEGIN(pt);
+  PT_BEGIN(pt);
+  //initial module
+  pSet = &AppConfig.implSet[IMPL_INDX];
+  pVar = &implVar[IMPL_INDX];
 
-    //initial module
-    pSet = &AppConfig.implSet[IMPL_INDX];
-    pVar = &implVar[IMPL_INDX];
+  pVar->IsFault = 0;
+  IMPL_SEM_WAIT_LOCK;
 
-    pVar->IsFault = 0;
+  IMPL_RTY_CLR;
+  imp_time = TickGetDiv64K();
+  PT_WAIT_UNTIL(pt, pt_is_dly_end(imp_time, IMPL_PAUSE_TIME));
+  IMPL_RTY_SET;
+  IMPL_LOP;
 
-    uint8_t run = 0;
-    IMPL_RTY_CLR;
+  IMPL_SEM_UNLOCK;
+
+  IMPL_GET_POS;
+
+  for (;;) {
+
+    PT_WAIT_WHILE(pt, (_IS_ENABLED || (_IS_CUR_LIMIT)));
+    PT_WAIT_UNTIL(pt, impl_is_to_run(IMPL_INDX));
+
+    IMPL_SEM_LOCK;
     imp_time = TickGetDiv64K();
-    PT_WAIT_UNTIL(pt, pt_is_dly_end(imp_time, IMPL_PAUSE_TIME));
-    IMPL_RTY_SET;
-    IMPL_LOP;
-    IMPL_GET_POS;
-
-    for (;;) {
-
-        PT_WAIT_WHILE(pt, (_IS_ENABLED || (_IS_CUR_LIMIT)));
-
-        /* run trigger with timeout ? single evaluation */
-        uint8_t run = 0;
-        imp_time = TickGetDiv64K();
-        PT_WAIT_UNTIL_OR_TIMEOUT(pt,
-                (run = impl_is_to_run(IMPL_INDX)),
-                imp_time,
-                IMPL_RUN_TIMEOUT_TICKS
-                );
-        if (!run) {
-            IMPL_BRK;
-            PT_YIELD(pt);
-            continue;
-        }
-
-        imp_time = TickGetDiv64K();
-        if (pVar->polarity == IMP_NEG) {
-            IMPL_NEG;
-            PT_WAIT_UNTIL(pt, pt_is_dly_end(imp_time, pSet->implLength));
-            if (_IS_CUR_OK) {
-                INT_LOCK;
-                pVar->polarity = IMP_POZ;
-                INT_UNLOCK;
-            }
-        } else {
-            IMPL_POZ;
-            PT_WAIT_UNTIL(pt, pt_is_dly_end(imp_time, pSet->implLength));
-            if (_IS_CUR_OK) {
-                INT_LOCK;
-                pVar->polarity = IMP_NEG;
-                INT_UNLOCK;
-            }
-        }
-        IMPL_BRK;
-
-        if (_IS_CUR_OK) {
-            impl_inc_ticks(IMPL_INDX);
-            IMPL_SET_POS;
-        }
-        imp_time = TickGetDiv64K();
-        if (pSet->implMode == 0) {
-            PT_WAIT_UNTIL(pt, pt_is_dly_end(imp_time, AppConfig.implSecPause));
-        } else {
-            PT_WAIT_UNTIL(pt, pt_is_dly_end(imp_time, AppConfig.implMinPause));
-        }
+    if (pVar->polarity == IMP_NEG) {
+      IMPL_NEG;
+      PT_WAIT_UNTIL(pt, pt_is_dly_end(imp_time, pSet->implLength));
+      if (_IS_CUR_OK) {
+        INT_LOCK;
+        pVar->polarity = IMP_POZ;
+        INT_UNLOCK;
+      }
+    } else { //if (pVar->polarity == IMP_POZ) {
+      IMPL_POZ;
+      PT_WAIT_UNTIL(pt, pt_is_dly_end(imp_time, pSet->implLength));
+      if (_IS_CUR_OK) {
+        INT_LOCK;
+        pVar->polarity = IMP_NEG;
+        INT_UNLOCK;
+      }
     }
-    PT_END(pt);
+    IMPL_BRK;
+    IMPL_SEM_UNLOCK;
+
+    if (_IS_CUR_OK) {
+      impl_inc_ticks(IMPL_INDX);
+      IMPL_SET_POS;
+    }
+    imp_time = TickGetDiv64K();
+    if (pSet->implMode == 0) {
+      PT_WAIT_UNTIL(pt, pt_is_dly_end(imp_time, AppConfig.implSecPause));
+    } else {
+      PT_WAIT_UNTIL(pt, pt_is_dly_end(imp_time, AppConfig.implMinPause));
+    }
+  }
+  PT_END(pt);
 }

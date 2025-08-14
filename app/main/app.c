@@ -131,13 +131,14 @@ int main(void) {
 
     AppConfig.implSet[1].isEnabled = 1;
     AppConfig.implSet[2].isEnabled = 1;
-    AppConfig.implSet[1].implMode = 0; // seconds-based
+    AppConfig.implSet[1].implMode = 1; // seconds-based
     AppConfig.implSet[2].implMode = 0;
-    AppConfig.implSet[1].implLength = 5; // some non-zero pulse length (units = your Tick divisor)
-    AppConfig.implSet[2].implLength = 5;
+    AppConfig.implSet[1].implLength = 5U; // some non-zero pulse length (units = your Tick divisor)
+    AppConfig.implSet[2].implLength = 5U;
     AppConfig.implSet[1].timeZone = 1;
     AppConfig.implSet[2].timeZone = 1;
-
+    AppConfig.gpsIsEnabled=1;
+    
     ds_check_new_time();
 
     for (;;) {
