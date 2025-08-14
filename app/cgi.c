@@ -72,10 +72,7 @@ void cgi_upr(BYTE *prt) {
 
   AppConfig.relay1IsEnabled = r[1];
   AppConfig.relay2IsEnabled = r[2];
-  AppConfig.relay3IsEnabled = r[3];
-  AppConfig.relay4IsEnabled = r[4];
-  AppConfig.relay5IsEnabled = r[5];
-  AppConfig.relay6IsEnabled = r[6];
+
 
 
   if (AppConfig.relay1IsEnabled == 0) {
@@ -85,22 +82,6 @@ void cgi_upr(BYTE *prt) {
   if (AppConfig.relay2IsEnabled == 0) {
         ZVN_clr(ZVONO2);
         gSignal2 = -1;
-    }
-  if (AppConfig.relay3IsEnabled == 0) {
-        ZVN_clr(ZVONO3);
-        gSignal3 = -1;
-    }
-  if (AppConfig.relay4IsEnabled == 0) {
-        ZVN_clr(ZVONO4);
-        gSignal4 = -1;
-    }
-  if (AppConfig.relay5IsEnabled == 0) {
-        ZVN_clr(ZVONO5);
-        gSignal5 = -1;
-    }
-  if (AppConfig.relay6IsEnabled == 0) {
-        ZVN_clr(ZVONO6);
-        gSignal6 = -1;
     }
   APP_SaveSettings();
   

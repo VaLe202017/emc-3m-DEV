@@ -138,6 +138,7 @@ int main(void) {
     AppConfig.implSet[1].timeZone = 1;
     AppConfig.implSet[2].timeZone = 1;
     AppConfig.gpsIsEnabled=1;
+    //implVar[1].ticks=0;
     
     ds_check_new_time();
 

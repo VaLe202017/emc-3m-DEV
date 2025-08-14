@@ -627,22 +627,6 @@ void HTTPPrint_uconf(void) {
     TCPPut(sktHTTP, (num ? '1' : '0'));
     TCPPut(sktHTTP, ',');
 
-    num = AppConfig.relay3IsEnabled;
-    TCPPut(sktHTTP, (num ? '1' : '0'));
-    TCPPut(sktHTTP, ',');
-
-    num = AppConfig.relay4IsEnabled;
-    TCPPut(sktHTTP, (num ? '1' : '0'));
-    TCPPut(sktHTTP, ',');
-    
-    num = AppConfig.relay5IsEnabled;
-    TCPPut(sktHTTP, (num ? '1' : '0'));
-    TCPPut(sktHTTP, ',');
-    
-    num = AppConfig.relay6IsEnabled;
-    TCPPut(sktHTTP, (num ? '1' : '0'));
-    TCPPut(sktHTTP, ',');
-
     num = AppConfig.relayDayLight;
     TCPPut(sktHTTP, (num ? '1' : '0'));
     TCPPut(sktHTTP, ',');

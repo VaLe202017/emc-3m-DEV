@@ -94,10 +94,6 @@ typedef struct {
 
     UINT relay1IsEnabled;
     UINT relay2IsEnabled;
-    UINT relay3IsEnabled;
-    UINT relay4IsEnabled;
-    UINT relay5IsEnabled;
-    UINT relay6IsEnabled;
     INT relayTimezone;
     UINT relayDayLight;
     

@@ -33,10 +33,6 @@ void SaveAppConfig_ntp(const APP_CONFIG *AppConfig1) {
 void SaveAppConfig_upr(const APP_CONFIG *AppConfig1) {
     AppConfig.relay1IsEnabled = AppConfig1->relay1IsEnabled;
     AppConfig.relay2IsEnabled = AppConfig1->relay2IsEnabled;
-    AppConfig.relay3IsEnabled = AppConfig1->relay3IsEnabled;
-    AppConfig.relay4IsEnabled = AppConfig1->relay4IsEnabled;
-    AppConfig.relay5IsEnabled = AppConfig1->relay5IsEnabled;
-    AppConfig.relay6IsEnabled = AppConfig1->relay6IsEnabled;
     APP_SaveSettings();
 }
 
@@ -118,10 +114,6 @@ void app_defaults_load(void) {
     AppConfig.relayDayLight = 0;
     AppConfig.relay1IsEnabled = 1;
     AppConfig.relay2IsEnabled = 1;
-    AppConfig.relay3IsEnabled = 1;
-    AppConfig.relay4IsEnabled = 1;
-    AppConfig.relay5IsEnabled = 1;
-    AppConfig.relay6IsEnabled = 1;
 
 #if defined(EEPROM_CS_TRIS) || defined(SPIFLASH_CS_TRIS)
     unsigned char vNeedToSaveDefaults = 0;
