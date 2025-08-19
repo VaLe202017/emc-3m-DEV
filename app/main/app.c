@@ -14,6 +14,8 @@
 
 #include "app.h"
 
+#include <stdio.h>
+
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 static pt_t pt_ethernet;
 static pt_t pt_sat;
@@ -75,9 +77,9 @@ void rst_pt_device(void) {
 int main(void) {
 
     sys_io_init();
-
+    
     AppConfig.ID = 0xFF;
-
+    
     cmndW_data_int();
 
     //app_defaults_load();
@@ -120,25 +122,19 @@ int main(void) {
     sys_t1_init();
 
     TickInit(); // Inicijalizacija brojaca vremena
-    prgm_init_pt();
+    
 
     rst_pt_device();
     rst_pt_imp1();
     rst_pt_imp2();
+    
     implWaitSem = 0;
 
-    AppConfig.implSet[1].isEnabled = 1;
-    AppConfig.implSet[2].isEnabled = 1;
-    AppConfig.implSet[1].implMode = 1; // seconds-based
-    AppConfig.implSet[2].implMode = 0;
-    AppConfig.implSet[1].implLength = 5U; // some non-zero pulse length (units = your Tick divisor)
-    AppConfig.implSet[2].implLength = 5U;
-    AppConfig.implSet[1].timeZone = 1;
-    AppConfig.implSet[2].timeZone = 1;
     AppConfig.gpsIsEnabled = 1;
     
     ds_check_new_time();
-
+    
+    prgm_init_pt();
     for (;;) {
         ClearWDT();
         // service tasks
@@ -148,7 +144,6 @@ int main(void) {
         ds_check_new_time();
         impl_task_1(&pt_impulse1);
         impl_task_2(&pt_impulse2);
-        ds_check_new_time();
         if (U5STAbits.OERR) { // za clearanje overflowa na serialu ako se desi
             U5STAbits.OERR = 0;
         }

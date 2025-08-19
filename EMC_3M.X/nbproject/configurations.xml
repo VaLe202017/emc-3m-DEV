@@ -74,7 +74,6 @@
           <itemPath>../app/system/system_ser5.c</itemPath>
           <itemPath>../app/system/system_ser2.c</itemPath>
           <itemPath>../app/system/system_io.h</itemPath>
-          <itemPath>../app/system/system_iic5.c</itemPath>
         </logicalFolder>
         <logicalFolder name="web_pages2" displayName="web_pages2" projectFiles="true">
           <itemPath>../app/web_pages2/HTTPPrint.c</itemPath>
@@ -555,7 +554,6 @@
         <property key="event.recorder.debugger.behavior" value="Running"/>
         <property key="event.recorder.enabled" value="false"/>
         <property key="event.recorder.scvd.files" value=""/>
-        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="lastid" value=""/>
         <property key="memories.aux" value="false"/>

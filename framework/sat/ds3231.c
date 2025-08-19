@@ -75,6 +75,7 @@ void ds3231_1hz_enable() {
 }
 
 /*----------------------------------------------------------------------------*/
+
 void ds3231_time_get(datumvrijeme_t *time) {
     sys_iic2_read(DS3231_ADDRESS, DS3231_REG_SECOND, DS32Reg, 7);
     time->sekunda = bcd2bin(DS32Reg[DS3231_REG_SECOND] & 0x7FU);

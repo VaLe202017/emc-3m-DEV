@@ -47,9 +47,9 @@
 
 /*----------------------------------------------------------------------------*/
 
-//extern volatile UINT gMinuitFlag;
+extern volatile UINT gMinuitFlag;
 
-//#define CLOCK_UPDATE_FROM_DS gMinuitFlag++
+#define CLOCK_UPDATE_FROM_DS gMinuitFlag++
 
 /*----------------------------------------------------------------------------*/
 /* system_iic2.c */

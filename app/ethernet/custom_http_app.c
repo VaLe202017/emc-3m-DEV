@@ -117,8 +117,8 @@ BYTE HTTPNeedsAuth(BYTE* cFile) {
 
 /*----------------------------------------------------------------------------*/
 BYTE HTTPCheckAuth(BYTE* cUser, BYTE* cPass) {
-    if (strcmppgm2ram((char *) cUser, (ROM char *) "erm-3m") == 0
-            && strcmppgm2ram((char *) cPass, (ROM char *) "elak2203") == 0)
+    if (strcmppgm2ram((char *) cUser, (ROM char *) "1") == 0 //login credentials
+            && strcmppgm2ram((char *) cPass, (ROM char *) "1") == 0) //login credentials
         return 0x80; // We accept this combination
 
     return 0x00; // Provided user/pass is invalid
@@ -147,7 +147,7 @@ HTTP_IO_RESULT HTTPExecuteGet(void) {
         if (ptr != NULL) {
             cgi_date(ptr);
         }
-    
+
     } else if (!memcmppgm2ram(filename, "admin/clock.htm", 15)) {
         ptr = HTTPGetROMArg(curHTTP.data, (ROM uint8_t *) "dt");
         if (ptr) AppConfig.TimeOfTime = getValue(ptr);
@@ -215,10 +215,9 @@ HTTP_IO_RESULT HTTPExecuteGet(void) {
             AppConfig.lopwrToMin = getValue(ptr1);
         }
         app_settings_save();
-    
-    
-    }
-    else if (!memcmppgm2ram(filename, "admin/flt.cgi", 13)) {
+
+
+    } else if (!memcmppgm2ram(filename, "admin/flt.cgi", 13)) {
         ptr = HTTPGetROMArg(curHTTP.data, (ROM BYTE *) "flt");
         switch (*ptr) {
             case '1':
@@ -226,12 +225,12 @@ HTTP_IO_RESULT HTTPExecuteGet(void) {
                 break;
             case '2':
                 break;
-            
+
             default:
                 break;
         }
 
-    }else if (!memcmppgm2ram(filename, "admin/li.cgi", 13)) {
+    } else if (!memcmppgm2ram(filename, "admin/li.cgi", 13)) {
         ptr = HTTPGetROMArg(curHTTP.data, (ROM BYTE *) "l");
         switch (*ptr) {
             case 'L':
@@ -316,10 +315,10 @@ HTTP_IO_RESULT HTTPExecuteGet(void) {
             default:
                 break;
         }
-    
-    
 
-    
+
+
+
 
     } else if (!memcmppgm2ram(filename, "admin/ien.cgi", 13)) {
         ptr = HTTPGetROMArg(curHTTP.data, (ROM BYTE *) "ien");
@@ -331,6 +330,11 @@ HTTP_IO_RESULT HTTPExecuteGet(void) {
         ptr = HTTPGetROMArg(curHTTP.data, (ROM BYTE *) "upr");
         if (ptr != NULL) {
             cgi_upr(ptr);
+        }
+    } else if (!memcmppgm2ram(filename, "admin/imp.cgi", 13)) {
+        ptr = HTTPGetROMArg(curHTTP.data, (ROM BYTE *) "imp");
+        if (ptr != NULL) {
+            cgi_imp(ptr);
         }
     }
     return HTTP_IO_DONE;
@@ -382,8 +386,8 @@ static HTTP_IO_RESULT HTTPPostNTPConfig(void) {
     newAppConfig.ntpPOOLIsEnabled = 0;
     newAppConfig.ntpIsEnabled = 0;
     newAppConfig.gpsIsEnabled = 0;
-    newAppConfig.ntpIPAddr=AppConfig.ntpIPAddr;
-    newAppConfig.ntpPort=AppConfig.ntpPort;
+    newAppConfig.ntpIPAddr = AppConfig.ntpIPAddr;
+    newAppConfig.ntpPort = AppConfig.ntpPort;
 
 
     // Read all browser POST data
@@ -406,15 +410,15 @@ static HTTP_IO_RESULT HTTPPostNTPConfig(void) {
             if (curHTTP.data[6] == '1')
                 newAppConfig.ntpPOOLIsEnabled = 1;
         } else if (!strcmppgm2ram((char*) curHTTP.data, (ROM char*) "ntps")) {
-            if (curHTTP.data[6] == '1'){
+            if (curHTTP.data[6] == '1') {
                 newAppConfig.ntpIsEnabled = 1;
             }
-            if (curHTTP.data[6] == '2'){
+            if (curHTTP.data[6] == '2') {
                 sat_datetime_init(&gprmcTime);
                 sat_datetime_init(&gZadSinkroGPS);
                 cmndW_data_int();
                 newAppConfig.gpsIsEnabled = 1;
-                
+
             }
         }
     }
@@ -496,7 +500,7 @@ static HTTP_IO_RESULT HTTPPostConfig(void) {
                 // Skip non-hex bytes
                 while (*ptr != 0x00u && !(*ptr >= '0' && *ptr <= '9') && !(*ptr >= 'A' && *ptr <= 'F') && !(*ptr >= 'a' && *ptr <= 'f'))
                     ptr++;
-                
+
                 // MAC string is over, so zeroize the rest
                 if (*ptr == 0x00u) {
                     for (; i < 12u; i++)

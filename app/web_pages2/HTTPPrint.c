@@ -134,7 +134,6 @@ void HTTPPrint_lin(void) {
     curHTTP.callbackPos = 0x00;
 }
 
-
 void HTTPPrint_rtim(void) {
     curHTTP.callbackPos = 0x01;
     if (TCPIsPutReady(sktHTTP) < 20) {
@@ -296,15 +295,15 @@ void HTTPPrint_time() {
     BYTE digits[10];
 
     uitoa(vrijeme.dan, digits);
-    if(vrijeme.dan<10){
+    if (vrijeme.dan < 10) {
         TCPPutROMString(sktHTTP, (ROM void*) "0");
     }
     TCPPutString(sktHTTP, digits);
-    
+
     TCPPutROMString(sktHTTP, (ROM void*) ".");
 
     uitoa(vrijeme.mjesec, digits);
-    if(vrijeme.mjesec<10){
+    if (vrijeme.mjesec < 10) {
         TCPPutROMString(sktHTTP, (ROM void*) "0");
     }
     TCPPutString(sktHTTP, digits);
@@ -315,13 +314,13 @@ void HTTPPrint_time() {
     TCPPutROMString(sktHTTP, (ROM void*) ". ");
 
     uitoa(vrijeme.sat, digits);
-    if(vrijeme.sat<10){
+    if (vrijeme.sat < 10) {
         TCPPutROMString(sktHTTP, (ROM void*) "0");
     }
     TCPPutString(sktHTTP, digits);
     TCPPutROMString(sktHTTP, (ROM void*) ":");
     uitoa(vrijeme.minuta, digits);
-    if(vrijeme.minuta<10){
+    if (vrijeme.minuta < 10) {
         TCPPutROMString(sktHTTP, (ROM void*) "0");
     }
     TCPPutString(sktHTTP, digits);
@@ -349,6 +348,7 @@ void HTTPPrint_temp() {
 
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 // Ispis na web
+
 void HTTPPrint_ntp_zad() {
     curHTTP.callbackPos = 0x01;
     if (TCPIsPutReady(sktHTTP) < 25)
@@ -381,20 +381,22 @@ void HTTPPrint_ntp_zad() {
 
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 // Is NTP enabled?
+
 void HTTPPrint_ntp_is() {
     if (AppConfig.ntpIsEnabled == 1) {
         TCPPutROMString(sktHTTP, (ROM BYTE*) "checked");
     }
-    
+
     return;
 }
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 // Is GPS enabled?
+
 void HTTPPrint_gps_is() {
     if (AppConfig.gpsIsEnabled == 1) {
         TCPPutROMString(sktHTTP, (ROM BYTE*) "checked");
     }
-    
+
     return;
 }
 
@@ -562,7 +564,7 @@ void HTTPPrint_bnap(void) {
 
     BYTE AN0String[12];
 
-//    uitoa(deviceBezNap, (BYTE*) AN0String);
+    //    uitoa(deviceBezNap, (BYTE*) AN0String);
     TCPPutString(sktHTTP, AN0String);
     TCPPutROMString(sktHTTP, (ROM void*) " min");
 }
@@ -591,14 +593,14 @@ void HTTPPrint_rl14(void) {
     num = ZVN_get(ZVONO4);
     TCPPut(sktHTTP, (num ? '1' : '0'));
     TCPPut(sktHTTP, ',');
-    
+
     num = ZVN_get(ZVONO5);
     TCPPut(sktHTTP, (num ? '1' : '0'));
     TCPPut(sktHTTP, ',');
-    
+
     num = ZVN_get(ZVONO6);
     TCPPut(sktHTTP, (num ? '1' : '0'));
-    
+
 }
 
 void HTTPPrint_uconf(void) {
@@ -848,7 +850,7 @@ void HTTPPrint_zadgps(void) {
     TCPPutString(sktHTTP, digits);
     TCPPutROMString(sktHTTP, (ROM void*) ".");
 
-    
+
     num = gZadSinkroGPS.godina;
     if (num > 9) {
         TCPPutROMString(sktHTTP, (ROM void*) "20");
@@ -875,10 +877,11 @@ void HTTPPrint_zadgps(void) {
 
     curHTTP.callbackPos = 0x00;
 }
+
 /*----------------------------------------------------------------------------*/
 void HTTPPrint_checkSincronization(void) {
     curHTTP.callbackPos = 0x01;
-    uint8_t checkGPS= gprmc_gps_isValid();
+    uint8_t checkGPS = gprmc_gps_isValid();
     BYTE checkGPSnum[4];
     uitoa(checkGPS, checkGPSnum);
     TCPPutString(sktHTTP, checkGPSnum);
@@ -892,15 +895,16 @@ void HTTPPrint_gString(void) {
     }
     if (cmdAnswerValid == true) {
         TCPPutString(sktHTTP, (BYTE *) cmdBufAnswer);
-        cmdAnswerValid=false;
+        cmdAnswerValid = false;
     } else {
         TCPPutROMString(sktHTTP, (ROM void*) " ");
     }
     cmdBufAnswer[0] = '\0';
-    
+
 }
+
 /*----------------------------------------------------------------------------*/
-void HTTPPrint_sync(void){
+void HTTPPrint_sync(void) {
     curHTTP.callbackPos = 0x01;
     if (TCPIsPutReady(sktHTTP) < 20) {
         return;
@@ -943,8 +947,7 @@ void HTTPPrint_sync(void){
         num = gZadSinkroGPS.sekunda;
         uitoa(num, digits);
         TCPPutString(sktHTTP, digits);
-        }
-    else{
+    } else {
         BYTE digits[4];
         UINT16 num;
 
@@ -984,9 +987,118 @@ void HTTPPrint_sync(void){
         uitoa(num, digits);
         TCPPutString(sktHTTP, digits);
     }
-    
-    
-    
-    
+
+
+
+
     curHTTP.callbackPos = 0x00;
+}
+
+void HTTPPrint_ien(void) {
+    UINT16 num;
+    num = AppConfig.implSet[1].isEnabled;
+    // Print the output
+    TCPPut(sktHTTP, (num ? '1' : '0'));
+}
+
+void HTTPPrint_imp(UINT16 num) {
+    curHTTP.callbackPos = 0x01;
+    if (TCPIsPutReady(sktHTTP) < 15)
+        return;
+    curHTTP.callbackPos = 0x00;
+
+    BYTE digits[10];
+    UINT indx;
+
+    indx = 0;
+    switch (num) {
+        case 1:
+            indx = 1;
+            break;
+        case 2:
+            indx = 2;
+            break;
+        case 3:
+            indx = 3;
+            break;
+        case 4:
+            indx = 4;
+            break;
+        case 5:
+            indx = 5;
+            break;
+        case 6:
+            indx = 6;
+            break;
+        case 7:
+            indx = 7;
+            break;
+        case 8:
+            indx = 8;
+            break;
+        default:
+            break;
+    }
+    if (indx == 0) {
+        return;
+    }
+    num = AppConfig.implSet[indx].isEnabled;
+    uitoa(num, digits);
+    TCPPutString(sktHTTP, digits);
+    TCPPutROMString(sktHTTP, (ROM void*) ",");
+
+    num = implVar[indx].IsFault;
+    uitoa(num, digits);
+    TCPPutString(sktHTTP, digits);
+    TCPPutROMString(sktHTTP, (ROM void*) ",");
+
+    num = implVar[indx].ticks;
+    uitoa(num, digits);
+    TCPPutString(sktHTTP, digits);
+}
+
+void HTTPPrint_tim(UINT16 num) {
+    curHTTP.callbackPos = 0x01;
+    if (TCPIsPutReady(sktHTTP) < 8)
+        return;
+    curHTTP.callbackPos = 0x00;
+
+    BYTE digits[10];
+    UINT indx;
+
+    indx = 0;
+    switch (num) {
+        case 1:
+            indx = 1;
+            break;
+        case 2:
+            indx = 2;
+            break;
+        case 3:
+            indx = 3;
+            break;
+        case 4:
+            indx = 4;
+            break;
+        case 5:
+            indx = 5;
+            break;
+        case 6:
+            indx = 6;
+            break;
+        case 7:
+            indx = 7;
+            break;
+        case 8:
+            indx = 8;
+            break;
+        default:
+            break;
+    }
+    if (indx == 0) {
+        return;
+    }
+    num = implVar[indx].time;
+    uitoa(num, digits);
+    TCPPutString(sktHTTP, digits);
 }

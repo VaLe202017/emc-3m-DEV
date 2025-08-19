@@ -37,7 +37,8 @@
 
 #define FLASH_PAGE_SIZE 4096
 //#define FLASH_PAGE_PROG 0xBD031000UL
-#define FLASH_PAGE_PROG 0xBD06A000UL
+//#define FLASH_PAGE_PROG 0xBD06A000UL stara adresa
+#define FLASH_PAGE_PROG 0xBD07B000UL
 //const unsigned int flashData __attribute__ ((aligned (FLASH_PAGE_SIZE))) = {0};
 
 static UINT pagebuff[1024];

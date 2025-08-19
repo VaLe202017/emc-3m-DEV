@@ -1,0 +1,792 @@
+~inc:header.inc~
+<div id="content">
+<h1>Podešavanje satova I1 i I2</h1>
+
+	<div id="basic" style="width: 600px;">
+		<div id="Box4x4">
+			<div class="topRow">
+				<div class="box" id="box1" style="border-right: 1px solid; padding-right: 2px;"><!--top row za prvu satnu grupu-->
+					<div class="background" id="naslovI1"> Satna grupa I1</div>
+					<div class="zahtijevanoVrijeme"><div class="background">Trenutno vrijeme</div><div class="background" id="zahtijevanoVrijeme1">00:00:00</div></div>
+					<div class="trenutniPolozaj"><div class="background">Trenutni polozaj</div><div class="background" id="trenutniPolozaj1">00:00:00</div></div>
+					<div class="ponistenje"><div><input type="checkbox" id="aktivan1"><label for="aktivan1">Aktivan</label></div><div><button class="button" id="ponistenje1">Poništi I1 greške</button></div></div>
+				</div>
+			</div>
+			<div class="topRow" id="box2">
+				<div class="box"><!--top row za drugu satnu grupu-->
+					<div class="background" id="naslovI2"> Satna grupa I2</div>
+					<div class="zahtijevanoVrijeme"><div class="background">Trenutno vrijeme</div><div class="background" id="zahtijevanoVrijeme2">00:00:00</div></div>
+					<div class="trenutniPolozaj"><div class="background">Trenutni polozaj</div><div class="background" id="trenutniPolozaj2">00:00:00</div></div>
+					<div class="ponistenje"><div><input type="checkbox" id="aktivan2"><label for="aktivan2" >Aktivan</label></div><div><button class="button" id="ponistenje2">Poništi I2 greške</button></div></div>
+				</div>
+			</div>
+			<form>
+			<div class="bottomRow" id="box3" style="border-right: 1px solid; padding-right: 1px;">
+				<div style="margin-top: 3px;"><input type="checkbox" id="sumWinActive1"><label for="sumWinActive1">Aktiviraj zimsko ljetno vrijeme</label></div>
+				<div class="timeZone"><div class="background">Vremenska zona</div><div style="text-align: center;"><select name="vremensaZona1" id="vremenska1">
+					<option value="0">UTC-12:00</option>
+                    <option value="1">UTC-11:00</option>
+                    <option value="2">UTC-10:00</option>
+                    <option value="3">UTC-09:00</option>
+                    <option value="4">UTC-08:00</option>
+                    <option value="5">UTC-07:00</option>
+                    <option value="6">UTC-06:00</option>
+                    <option value="7">UTC-05:00</option>
+                    <option value="8">UTC-04:00</option>
+                    <option value="9">UTC-03:00</option>
+                    <option value="10">UTC-02:00</option>
+                    <option value="11">UTC-01:00</option>
+                    <option value="12" selected>UTC</option>
+                    <option value="13">UTC+01:00</option>
+                    <option value="14">UTC+02:00</option>
+                    <option value="15">UTC+03:00</option>
+                    <option value="16">UTC+04:00</option>
+                    <option value="17">UTC+05:00</option>
+                    <option value="18">UTC+06:00</option>
+                    <option value="19">UTC+07:00</option>
+                    <option value="20">UTC+08:00</option>
+                    <option value="21">UTC+09:00</option>
+                    <option value="22">UTC+10:00</option>
+                    <option value="23">UTC+11:00</option>
+                    <option value="24">UTC+12:00</option>
+                    <option value="25">UTC+13:00</option>
+                    <option value="26">UTC+14:00</option>
+				</select></div></div>
+				<div class="typeMehanizam"><div class="background">Tip mehanizma</div><div style="text-align: center;"><select name="odabirMehanizma1" id="mehanizam1" style="width: 95px;"><option value="0">Sekudni</option><option value="1">Minutni</option></select></div></div>
+				<div class="impulseTime"><div class="background">Duljina impulsa</div><div class="background" id="duljinaImpulsa1">0.2 sec</div></div>
+				<div><input type="range" id="slider1" min="0.2" max="9.9" step="0.1" value="0.2" style="float: right; width: 140px; margin-right: 5px;"></div>
+				<div class="background" id="polozajMehanizmaStyle1">
+					<div>Položaji mehanizama</div>
+					<div>hh : mm : ss</div>
+					<div class="slideri"><div><select name="mehanizamSati1" id="mehanizamSati1">
+						<option value="0">00</option>
+						<option value="1">01</option>
+						<option value="2">02</option>
+						<option value="3">03</option>
+						<option value="4">04</option>
+						<option value="5">05</option>
+						<option value="6">06</option>
+						<option value="7">07</option>
+						<option value="8">08</option>
+						<option value="9">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+					</select></div>
+					<div>:</div>
+					<div><select name="mehanizamMinute1" id="mehanizamMinute1">
+						<option value="0">00</option>
+						<option value="1">01</option>
+						<option value="2">02</option>
+						<option value="3">03</option>
+						<option value="4">04</option>
+						<option value="5">05</option>
+						<option value="6">06</option>
+						<option value="7">07</option>
+						<option value="8">08</option>
+						<option value="9">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+						<option value="32">32</option>
+						<option value="33">33</option>
+						<option value="34">34</option>
+						<option value="35">35</option>
+						<option value="36">36</option>
+						<option value="37">37</option>
+						<option value="38">38</option>
+						<option value="39">39</option>
+						<option value="40">40</option>
+						<option value="41">41</option>
+						<option value="42">42</option>
+						<option value="43">43</option>
+						<option value="44">44</option>
+						<option value="45">45</option>
+						<option value="46">46</option>
+						<option value="47">47</option>
+						<option value="48">48</option>
+						<option value="49">49</option>
+						<option value="50">50</option>
+						<option value="51">51</option>
+						<option value="52">52</option>
+						<option value="53">53</option>
+						<option value="54">54</option>
+						<option value="55">55</option>
+						<option value="56">56</option>
+						<option value="57">57</option>
+						<option value="58">58</option>
+						<option value="59">59</option>
+					</select></div>
+					<div>:</div>
+					<div><select name="mehanizamSekunde1" id="mehanizamSekunde1">
+						<option value="0">00</option>
+						<option value="1">01</option>
+						<option value="2">02</option>
+						<option value="3">03</option>
+						<option value="4">04</option>
+						<option value="5">05</option>
+						<option value="6">06</option>
+						<option value="7">07</option>
+						<option value="8">08</option>
+						<option value="9">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+						<option value="32">32</option>
+						<option value="33">33</option>
+						<option value="34">34</option>
+						<option value="35">35</option>
+						<option value="36">36</option>
+						<option value="37">37</option>
+						<option value="38">38</option>
+						<option value="39">39</option>
+						<option value="40">40</option>
+						<option value="41">41</option>
+						<option value="42">42</option>
+						<option value="43">43</option>
+						<option value="44">44</option>
+						<option value="45">45</option>
+						<option value="46">46</option>
+						<option value="47">47</option>
+						<option value="48">48</option>
+						<option value="49">49</option>
+						<option value="50">50</option>
+						<option value="51">51</option>
+						<option value="52">52</option>
+						<option value="53">53</option>
+						<option value="54">54</option>
+						<option value="55">55</option>
+						<option value="56">56</option>
+						<option value="57">57</option>
+						<option value="58">58</option>
+						<option value="59">59</option>
+					</select></div></div>
+				</div>
+				<div style="text-align: center;"><input type="button" value="Pošalji konfiguraciju I1"  class="button" id="sendConfig1"></div>
+			</div>
+			</form>
+			<form>
+			<div class="bottomRow" id="box4" style="margin-left: 2px;">
+				<div style="margin-top: 3px;"><input type="checkbox" id="sumWinActive2"><label for="sumWinActive2">Aktiviraj zimsko ljetno vrijeme</label></div>
+				<div class="timeZone" id="timeZone2"><div class="background">Vremenska zona</div><div style="text-align: center;"><select name="vremensaZona2" id="vremenska2">
+					<option value="0">UTC-12:00</option>
+                    <option value="1">UTC-11:00</option>
+                    <option value="2">UTC-10:00</option>
+                    <option value="3">UTC-09:00</option>
+                    <option value="4">UTC-08:00</option>
+                    <option value="5">UTC-07:00</option>
+                    <option value="6">UTC-06:00</option>
+                    <option value="7">UTC-05:00</option>
+                    <option value="8">UTC-04:00</option>
+                    <option value="9">UTC-03:00</option>
+                    <option value="10">UTC-02:00</option>
+                    <option value="11">UTC-01:00</option>
+                    <option value="12" selected>UTC</option>
+                    <option value="13">UTC+01:00</option>
+                    <option value="14">UTC+02:00</option>
+                    <option value="15">UTC+03:00</option>
+                    <option value="16">UTC+04:00</option>
+                    <option value="17">UTC+05:00</option>
+                    <option value="18">UTC+06:00</option>
+                    <option value="19">UTC+07:00</option>
+                    <option value="20">UTC+08:00</option>
+                    <option value="21">UTC+09:00</option>
+                    <option value="22">UTC+10:00</option>
+                    <option value="23">UTC+11:00</option>
+                    <option value="24">UTC+12:00</option>
+                    <option value="25">UTC+13:00</option>
+                    <option value="26">UTC+14:00</option>
+				</select></div></div>
+				<div class="typeMehanizam"><div class="background">Tip mehanizma</div><div style="text-align: center;"><select name="odabirMehanizma2" id="mehanizam2" style="width: 95px;" disabled><option value="1">Minutni</option></select></div></div>
+				<div class="impulseTime"><div class="background">Duljina impulsa</div><div class="background" id="duljinaImpulsa2">0.2 sec</div></div>
+				<div><input type="range" id="slider2" min="0.2" max="9.9" step="0.1" value="0.2" style="float: right; margin-right: 5px; width: 140px;"></div>
+				<div class="background" id="polozajMehanizmaStyle2">
+					<div>Položaji mehanizama</div>
+					<div>hh : mm : ss</div>
+					<div class="slideri"><div><select name="mehanizamSati2" id="mehanizamSati2">
+						<option value="0">00</option>
+						<option value="1">01</option>
+						<option value="2">02</option>
+						<option value="3">03</option>
+						<option value="4">04</option>
+						<option value="5">05</option>
+						<option value="6">06</option>
+						<option value="7">07</option>
+						<option value="8">08</option>
+						<option value="9">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+					</select></div>
+					<div>:</div>
+					<div><select name="mehanizamMinute2" id="mehanizamMinute2">
+						<option value="0">00</option>
+						<option value="1">01</option>
+						<option value="2">02</option>
+						<option value="3">03</option>
+						<option value="4">04</option>
+						<option value="5">05</option>
+						<option value="6">06</option>
+						<option value="7">07</option>
+						<option value="8">08</option>
+						<option value="9">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+						<option value="32">32</option>
+						<option value="33">33</option>
+						<option value="34">34</option>
+						<option value="35">35</option>
+						<option value="36">36</option>
+						<option value="37">37</option>
+						<option value="38">38</option>
+						<option value="39">39</option>
+						<option value="40">40</option>
+						<option value="41">41</option>
+						<option value="42">42</option>
+						<option value="43">43</option>
+						<option value="44">44</option>
+						<option value="45">45</option>
+						<option value="46">46</option>
+						<option value="47">47</option>
+						<option value="48">48</option>
+						<option value="49">49</option>
+						<option value="50">50</option>
+						<option value="51">51</option>
+						<option value="52">52</option>
+						<option value="53">53</option>
+						<option value="54">54</option>
+						<option value="55">55</option>
+						<option value="56">56</option>
+						<option value="57">57</option>
+						<option value="58">58</option>
+						<option value="59">59</option>
+					</select></div>
+					<div>:</div>
+					<div><select name="mehanizamSekunde2" id="mehanizamSekunde2">
+						<option value="0">00</option>
+						<option value="1">01</option>
+						<option value="2">02</option>
+						<option value="3">03</option>
+						<option value="4">04</option>
+						<option value="5">05</option>
+						<option value="6">06</option>
+						<option value="7">07</option>
+						<option value="8">08</option>
+						<option value="9">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+						<option value="32">32</option>
+						<option value="33">33</option>
+						<option value="34">34</option>
+						<option value="35">35</option>
+						<option value="36">36</option>
+						<option value="37">37</option>
+						<option value="38">38</option>
+						<option value="39">39</option>
+						<option value="40">40</option>
+						<option value="41">41</option>
+						<option value="42">42</option>
+						<option value="43">43</option>
+						<option value="44">44</option>
+						<option value="45">45</option>
+						<option value="46">46</option>
+						<option value="47">47</option>
+						<option value="48">48</option>
+						<option value="49">49</option>
+						<option value="50">50</option>
+						<option value="51">51</option>
+						<option value="52">52</option>
+						<option value="53">53</option>
+						<option value="54">54</option>
+						<option value="55">55</option>
+						<option value="56">56</option>
+						<option value="57">57</option>
+						<option value="58">58</option>
+						<option value="59">59</option>
+					</select></div></div>
+				</div>
+				<div style="text-align: center;"><input type="button" value="Pošalji konfiguraciju I2"  class="button" id="sendConfig2"></div>
+			</div>
+			</form>
+		</div>
+		<div id="link">www.elak.hr</div>
+	</div>
+</div>
+~inc:footer.inc~
+
+<script language="javascript">
+
+function disableEnableI1I2(){
+	if(document.getElementById('aktivan1').checked){
+		document.getElementById('sumWinActive1').disabled= true;
+		document.getElementById('vremenska1').disabled= true;
+		document.getElementById('mehanizam1').disabled= true;
+		document.getElementById('duljinaImpulsa1').disabled= true;
+		document.getElementById('mehanizamSati1').disabled= true;
+		document.getElementById('mehanizamMinute1').disabled= true;
+		document.getElementById('mehanizamSekunde1').disabled= true;
+		document.getElementById('sendConfig1').disabled= true;
+		document.getElementById('slider1').disabled= true;
+	}else{
+		document.getElementById('sumWinActive1').disabled= false;
+		document.getElementById('vremenska1').disabled= false;
+		document.getElementById('mehanizam1').disabled= false;
+		document.getElementById('duljinaImpulsa1').disabled= false;
+		document.getElementById('mehanizamSati1').disabled= false;
+		document.getElementById('mehanizamMinute1').disabled= false;
+		document.getElementById('mehanizamSekunde1').disabled= false;
+		document.getElementById('sendConfig1').disabled= false;
+		document.getElementById('slider1').disabled= false;
+	}
+
+	if(document.getElementById('aktivan2').checked){
+		document.getElementById('sumWinActive2').disabled= true;
+		document.getElementById('vremenska2').disabled= true;
+		document.getElementById('mehanizam2').disabled= true;
+		document.getElementById('duljinaImpulsa2').disabled= true;
+		document.getElementById('mehanizamSati2').disabled= true;
+		document.getElementById('mehanizamMinute2').disabled= true;
+		document.getElementById('mehanizamSekunde2').disabled= true;
+		document.getElementById('sendConfig2').disabled= true;
+		document.getElementById('slider2').disabled= true;
+	}else{
+		document.getElementById('sumWinActive2').disabled= false;
+		document.getElementById('vremenska2').disabled= false;
+		document.getElementById('mehanizam2').disabled= false;
+		document.getElementById('duljinaImpulsa2').disabled= false;
+		document.getElementById('mehanizamSati2').disabled= false;
+		document.getElementById('mehanizamMinute2').disabled= false;
+		document.getElementById('mehanizamSekunde2').disabled= false;
+		document.getElementById('sendConfig2').disabled= false;
+		document.getElementById('slider2').disabled= false;
+	}
+		
+	}
+
+
+
+
+var sendConfig1= document.getElementById('sendConfig1');
+sendConfig1.onclick= function(){
+	var str= '1';
+	str+= ',';
+
+	if(document.querySelector("#sumWinActive1").checked){
+		str+= '1';
+	}else{
+		str+= '0';
+	}
+	str+=',';
+	str+= document.getElementById('vremenska1').value;
+	str+= ',';
+	str+= document.getElementById('mehanizam1').value;
+	str+= ',';
+
+	var polozajMehanizma= parseInt(document.getElementById('mehanizamSati1').value) * 3600 + parseInt(document.getElementById('mehanizamMinute1').value) * 60 + parseInt(document.getElementById('mehanizamSekunde1').value);
+	str+= polozajMehanizma;
+
+	str+=',';
+	str+= document.getElementById('slider1').value * 1000;
+	
+	console.log(str);
+
+	const endpoint= `/admin/imp.cgi?imp=${str}`;
+	fetch(endpoint,{
+		method: 'POST'
+	})
+	.then(response=>{return response.text();})
+	.then(data => {console.log('Data received:', data);})
+	.catch(error => {console.error('Error during fetch:', error);})
+}
+
+var sendConfig2= document.getElementById('sendConfig2');
+sendConfig2.onclick= function(){
+	var str= '2';
+	str+= ',';
+
+	if(document.querySelector("#sumWinActive2").checked){
+		str+= '1';
+	}else{
+		str+= '0';
+	}
+	str+=',';
+	str+= document.getElementById('vremenska2').value;
+	str+= ',';
+	str+= document.getElementById('mehanizam2').value;
+	str+= ',';
+
+	var polozajMehanizma= parseInt(document.getElementById('mehanizamSati2').value) * 3600 + parseInt(document.getElementById('mehanizamMinute2').value) * 60 + parseInt(document.getElementById('mehanizamSekunde2').value);
+	str+= polozajMehanizma;
+
+	str+=',';
+	str+= document.getElementById('slider2').value * 1000;
+
+	console.log(str);
+
+	const endpoint= `/admin/imp.cgi?imp=${str}`;
+	fetch(endpoint,{
+		method: 'POST'
+	})
+	.then(response=>{return response.text();})
+	.then(data => {console.log('Data received:', data);})
+	.catch(error => {console.error('Error during fetch:', error);})
+}
+
+
+function updateTimeAndPositon(xmlData){/*Ovdje je jos error checking*/
+	// Zahtijevano vrijeme za I1
+	var tim1= getXMLValue(xmlData, 'tim1');
+	var hours1= Math.floor(tim1/3600);
+	var minutes1= Math.floor((tim1 - (hours1 * 3600)) / 60);
+	var seconds1= tim1 - ((hours1 * 3600) + (minutes1 * 60));
+	document.getElementById('zahtijevanoVrijeme1').innerHTML= hours1 + ':' + minutes1 + ':' + seconds1;
+
+	// Zahtijevano vrijeme za I2
+	var tim2= getXMLValue(xmlData, 'tim2');
+	var hours2= Math.floor(tim2/3600);
+	var minutes2= Math.floor((tim2 - (hours2 * 3600)) / 60);
+	var seconds2= tim2 - ((hours2 * 3600) + (minutes2 * 60));
+	document.getElementById('zahtijevanoVrijeme2').innerHTML= hours2 + ':' + minutes2 + ':' + seconds2;
+
+	// Trenutni položaj za I1
+	var imp1= getXMLValue(xmlData, 'imp1');
+	var trenutniPolozajValue1= imp1.substring(4);
+	var polozajHours1= Math.floor(trenutniPolozajValue1/3600);
+	var polozajMinutes1= Math.floor((trenutniPolozajValue1 - (polozajHours1 * 3600)) / 60);
+	var polozajSeconds1= trenutniPolozajValue1 - ((polozajHours1 * 3600) + (polozajMinutes1 * 60));
+	document.getElementById('trenutniPolozaj1').innerHTML= polozajHours1 + ':' + polozajMinutes1 + ':' + polozajSeconds1;
+		
+	// Trenutni položaj za I2
+	var imp2= getXMLValue(xmlData, 'imp2');
+	var trenutniPolozajValue2= imp2.substring(4);
+	var polozajHours2= Math.floor(trenutniPolozajValue2/3600);
+	var polozajMinutes2= Math.floor((trenutniPolozajValue2 - (polozajHours2 * 3600)) / 60);
+	var polozajSeconds2= trenutniPolozajValue2 - ((polozajHours2 * 3600) + (polozajMinutes2 * 60));
+	document.getElementById('trenutniPolozaj2').innerHTML= polozajHours2 + ':' + polozajMinutes2 + ':' + polozajSeconds2;
+
+	// Detektiranje greške na liniji I1
+	if(imp1[2]=='1'){
+		document.getElementById('naslovI1').style.backgroundColor= 'red';
+	}else{
+		document.getElementById('naslovI1').style.backgroundColor= '';
+	}
+
+	// Detektiranje greške na liniji I2
+	if(imp2[2]=='1'){
+		document.getElementById('naslovI2').style.backgroundColor= 'red';
+	}else{
+		document.getElementById('naslovI2').style.backgroundColor= '';
+	}
+	
+	/*-------------------------------------------------------------*/
+	if(document.getElementById('aktivan1').checked==0){
+		if(document.getElementById('mehanizam1').value == 1){
+			document.getElementById('mehanizamSekunde1').disabled= true;
+			document.getElementById('mehanizamSekunde1').value= 0;
+			document.getElementById('slider1').max= '9.9';
+		}else{
+			document.getElementById('mehanizamSekunde1').disabled= false;
+			document.getElementById('slider1').max= '0.7';
+			document.getElementById('duljinaImpulsa1').innerHTML= document.getElementById('slider1').value + ' sec';
+		}
+	}
+	if(document.getElementById('aktivan2').checked==0){
+		if(document.getElementById('mehanizam2').value == 1){
+			document.getElementById('mehanizamSekunde2').disabled= true;
+			document.getElementById('mehanizamSekunde2').value= 0;
+			document.getElementById('slider2').max= '9.9';
+		}else{
+			document.getElementById('mehanizamSekunde2').disabled= false;
+			document.getElementById('slider2').max= '0.7';
+			document.getElementById('duljinaImpulsa2').innerHTML= document.getElementById('slider2').value + ' sec';
+		}
+	}
+	/*--------------------------------------------------------------*/
+
+}
+setTimeout("newAJAXCommand('imp.xml', updateTimeAndPositon, true)",500);
+
+// Poništenje greške za liniju I1
+var ponistenje1= document.getElementById('ponistenje1');
+ponistenje1.addEventListener('click', function(){
+	setTimeout("newAJAXCommand('/admin/flt.cgi?flt=1',false)", 500);
+});
+
+// Poništenje greške za liniju I2
+var ponistenje2= document.getElementById('ponistenje2');
+ponistenje2.addEventListener('click', function(){
+	setTimeout("newAJAXCommand('/admin/flt.cgi?flt=2',false)", 500);
+});
+
+var aktivan1= document.getElementById('aktivan1');
+aktivan1.addEventListener('change', function(){
+	disableEnableI1I2();
+	if(aktivan1.checked){
+		setTimeout("newAJAXCommand('/admin/ien.cgi?ien=11',false)", 500);
+	}else{
+		setTimeout("newAJAXCommand('/admin/ien.cgi?ien=10',false)", 500);
+	}
+});
+
+var aktivan2= document.getElementById('aktivan2');
+aktivan2.addEventListener('change', function(){
+	disableEnableI1I2();
+	if(aktivan2.checked){
+		setTimeout("newAJAXCommand('/admin/ien.cgi?ien=21',false)", 500);
+	}else{
+		setTimeout("newAJAXCommand('/admin/ien.cgi?ien=20',false)", 500);
+	}
+});
+
+document.getElementById('slider1').addEventListener('input', function(){
+	document.getElementById('duljinaImpulsa1').innerHTML= this.value + ' sec';
+});
+
+document.getElementById('slider2').addEventListener('input', function(){
+	document.getElementById('duljinaImpulsa2').innerHTML= this.value + ' sec';
+});
+
+window.onload= function(){
+	activeTab();
+	newAJAXCommand('imp.xml', checkActive, false); // Učitavanje je li impulsna linija aktiva ili neaktivna
+	function checkActive(xmlData){
+		var imp1= getXMLValue(xmlData, 'imp1');
+		if(imp1[0]==1){
+			document.getElementById('aktivan1').checked= true;
+		}else{
+			document.getElementById('aktivan1').checked= false;
+		}
+
+		var imp2= getXMLValue(xmlData, 'imp2');
+		if(imp2[0]==1){
+			document.getElementById('aktivan2').checked= true;
+		}else{
+			document.getElementById('aktivan2').checked= false;
+		}
+		disableEnableI1I2();
+	}
+
+	newAJAXCommand('iconf.xml', getConfig, false);
+	function getConfig(xmlData){
+
+
+		var conf1= getXMLValue(xmlData, 'iconf1');
+		//console.log('I1: ' + conf1);
+		conf1Arr= conf1.split(',');
+	
+		if(conf1Arr[0]== '1'){
+			document.getElementById('sumWinActive1').checked= true;
+		}else{
+			document.getElementById('sumWinActive1').checked= false;
+		}
+		
+		document.getElementById('vremenska1').value= conf1Arr[1];
+		document.getElementById('mehanizam1').value= conf1Arr[2];
+		document.getElementById('duljinaImpulsa1').innerHTML= parseFloat(conf1Arr[3])/1000 + ' sec';
+		document.getElementById('slider1').value= parseFloat(conf1Arr[3])/1000;
+
+		var conf2= getXMLValue(xmlData, 'iconf2');
+		//console.log('I2: ' + conf2);
+		conf2Arr= conf2.split(',');
+
+		if(conf2Arr[0]== '1'){
+			document.getElementById('sumWinActive2').checked= true;
+		}else{
+			document.getElementById('sumWinActive2').checked= false;
+		}
+
+		document.getElementById('vremenska2').value= conf2Arr[1];
+		document.getElementById('mehanizam2').value= conf2Arr[2];
+		document.getElementById('duljinaImpulsa2').innerHTML= parseFloat(conf2Arr[3])/1000 + ' sec';
+		document.getElementById('slider2').value= parseFloat(conf2Arr[3])/1000;
+	}
+	
+}
+
+</script>
+
+
+<style>
+	#basic {
+		display: grid;
+		grid-template-rows: auto auto;
+		border: 2px solid;
+		border-radius: 10px;
+		padding: 15px 5px;
+		margin-right: 265px;
+	}
+
+	#Box4x4 {
+		display: grid;
+		grid-template-columns: 300px 300px;
+		grid-template-rows: auto auto;
+	}
+
+	#polozajMehanizmaStyle1 {
+		display: grid;
+		grid-template-rows: auto auto auto;
+	}
+	#polozajMehanizmaStyle2 {
+		display: grid;
+		grid-template-rows: auto auto auto;
+	}
+
+	.slideri {
+		display: grid;
+		grid-template-columns: auto auto auto auto auto;
+	}
+
+	.topRow {
+		border-bottom: 2px solid;
+	}
+
+	.box {
+		display: grid;
+		grid-template-rows: repeat(4, auto);
+	}
+
+	.bottomRow {
+		display: grid;;
+		grid-template-rows: repeat(7, auto);
+	}
+	
+	.timeZone {
+		display: grid;
+		grid-template-columns: 150px 150px;
+	}
+
+	.typeMehanizam {
+		display: grid;
+		grid-template-columns: 150px 150px;
+	}
+
+	.impulseTime{
+		display: grid;
+		grid-template-columns: 150px 150px;
+	}
+
+	.zahtijevanoVrijeme {
+		display: grid;
+		grid-template-columns: 150px 150px;
+	}
+
+	.trenutniPolozaj {
+		display: grid;
+		grid-template-columns: 150px 150px;
+	}
+
+	.ponistenje {
+		display: grid;
+		grid-template-columns: 150px 150px;
+		justify-items: left;
+		align-items: center;
+	}
+
+	.background {
+		/*background-color: #6c1e1e;*/
+		border: 2px solid #8b0000;
+		border-radius: 10px;
+		text-align: center;
+		margin: 2px 5px;
+		padding: 5px;
+	}
+
+	#link {
+        margin: 2px;
+        padding: 5px;
+        /*background-color: #6c1e1e;*/
+		border-radius: 10px;
+		border: 2px solid #8b0000;
+        text-align: center;
+    }
+
+	.button {
+	margin: 2px;
+	padding: 5px 10px;
+	font-size: 15px; 
+	background-color: #8b0000; 
+	color: white; 
+	border-radius: 10px;
+    /*box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);*/
+    }
+    .button:hover {
+        background-color: gray;
+    }
+
+</style>
