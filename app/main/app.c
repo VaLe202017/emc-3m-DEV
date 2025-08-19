@@ -123,14 +123,12 @@ int main(void) {
 
     TickInit(); // Inicijalizacija brojaca vremena
     
-
     rst_pt_device();
     rst_pt_imp1();
     rst_pt_imp2();
     
     implWaitSem = 0;
 
-    AppConfig.gpsIsEnabled = 1;
     
     ds_check_new_time();
     
@@ -144,6 +142,7 @@ int main(void) {
         ds_check_new_time();
         impl_task_1(&pt_impulse1);
         impl_task_2(&pt_impulse2);
+        ds_check_new_time();
         if (U5STAbits.OERR) { // za clearanje overflowa na serialu ako se desi
             U5STAbits.OERR = 0;
         }

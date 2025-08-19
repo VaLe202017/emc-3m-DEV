@@ -1102,3 +1102,65 @@ void HTTPPrint_tim(UINT16 num) {
     uitoa(num, digits);
     TCPPutString(sktHTTP, digits);
 }
+
+void HTTPPrint_iconf(UINT16 num) {
+
+    curHTTP.callbackPos = 0x01;
+    if (TCPIsPutReady(sktHTTP) < 20)
+        return;
+    curHTTP.callbackPos = 0x00;
+
+    BYTE digits[10];
+    UINT indx;
+
+    indx = 0;
+    switch (num) {
+        case 1:
+            indx = 1;
+            break;
+        case 2:
+            indx = 2;
+            break;
+        case 3:
+            indx = 3;
+            break;
+        case 4:
+            indx = 4;
+            break;
+        case 5:
+            indx = 5;
+            break;
+        case 6:
+            indx = 6;
+            break;
+        case 7:
+            indx = 7;
+            break;
+        case 8:
+            indx = 8;
+            break;
+        default:
+            break;
+    }
+    if (indx == 0) {
+        return;
+    }
+    num = AppConfig.implSet[indx].dayLight;
+    uitoa(num, digits);
+    TCPPutString(sktHTTP, digits);
+    TCPPutROMString(sktHTTP, (ROM void*) ",");
+
+    num = AppConfig.implSet[indx].timeZone + 12;
+    uitoa(num, digits);
+    TCPPutString(sktHTTP, digits);
+    TCPPutROMString(sktHTTP, (ROM void*) ",");
+
+    num = AppConfig.implSet[indx].implMode;
+    uitoa(num, digits);
+    TCPPutString(sktHTTP, digits);
+    TCPPutROMString(sktHTTP, (ROM void*) ",");
+
+    num = AppConfig.implSet[indx].implLength;
+    uitoa(num, digits);
+    TCPPutString(sktHTTP, digits);
+}

@@ -99,6 +99,7 @@ void HTTPPrint_tempStatic(void);
 void HTTPPrint_humidSel(WORD);
 void HTTPPrint_humidStatic(void);
 void HTTPPrint_uconf(void);
+void HTTPPrint_iconf(WORD);
 
 void HTTPPrint(DWORD callbackID)
 {
@@ -439,6 +440,30 @@ void HTTPPrint(DWORD callbackID)
 			break;
         case 0x0000006f:
 			HTTPPrint_uconf();
+			break;
+        case 0x00000070:
+			HTTPPrint_iconf(1);
+			break;
+        case 0x00000071:
+			HTTPPrint_iconf(2);
+			break;
+        case 0x00000072:
+			HTTPPrint_iconf(3);
+			break;
+        case 0x00000073:
+			HTTPPrint_iconf(4);
+			break;
+        case 0x00000074:
+			HTTPPrint_iconf(5);
+			break;
+        case 0x00000075:
+			HTTPPrint_iconf(6);
+			break;
+        case 0x00000076:
+			HTTPPrint_iconf(7);
+			break;
+        case 0x00000077:
+			HTTPPrint_iconf(8);
 			break;
 		default:
 			// Output notification for undefined values
