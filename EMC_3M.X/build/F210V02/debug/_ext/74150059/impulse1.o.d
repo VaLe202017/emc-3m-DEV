@@ -28,7 +28,7 @@ build/F210V02/debug/_ext/74150059/impulse1.o: \
  ../app/ethernet/socket.h ../framework/sat/sat.h ../framework/key3/ki3.h \
  ../framework/cgi/cgi.h ../app/ect/app_ect.h ../app/NVMem.h \
  ../app/program.h ../app/zvono.h ../app/cgi.h \
- ../framework/impulse/impulseH.h ../app/main/mcp.h
+ ../framework/impulse/impulseH.h
 
 ../app/main/app.h:
 
@@ -119,5 +119,3 @@ build/F210V02/debug/_ext/74150059/impulse1.o: \
 ../app/cgi.h:
 
 ../framework/impulse/impulseH.h:
-
-../app/main/mcp.h:
