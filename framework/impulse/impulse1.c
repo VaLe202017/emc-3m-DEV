@@ -3,7 +3,6 @@
  */
 
 #include "app.h"
-#include "mcp.h"
 
 #define IMPL_INDX 1
 

@@ -1,428 +1,496 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ERM2024</title>
-    <link
-      href="/bootstrap/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <script src="/elak.js" type="text/javascript"></script>
-  </head>
-  <body style="background-color: rgb(141, 141, 141)">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fs-3">
-      <div class="container">
-        <a class="navbar-brand" href="http://www.elak.hr/">
-          <img src="/elak_zlatni.png" width="130" height="80" alt="ELAK" />
-        </a>
-        <button
-          class="navbar-toggler d-lg-none"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapsibleNavId"
-          aria-controls="collapsibleNavId"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="/index.htm">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin/sat.htm">Time</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin/prgm.htm">Program</a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link active"
-                href="/admin/upr.htm"
-                aria-current="page"
-                >Control <span class="visually-hidden">(current)</span></a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin/config.htm">Network</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin/ntp.htm">Sync</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="container p-3" id="content" style="background-color: dimgray">
-      <h1
-        class="text-light text-center border border-3 border-danger rounded-3 mt-2 pb-1"
-      >
-        Output control
-      </h1>
-      <div class="row">
-        <div class="col">
-          <div
-            class="card border border-3 border-danger bg-secondary rounded-3"
-          >
-            <div class="card-body d-grid justify-content-center">
-              <h3 class="card-title text-light">
-                Enable/disable relay programs
-              </h3>
-              <div class="row mt-3">
-                <div class="form-check col form-switch text-light">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    role="switch"
-                    id="R1akt"
-                  />
-                  <label class="form-check-label" for="R1akt">R1</label>
-                </div>
+~inc:header.inc~
+<div id="content">
+<h1>Upravljanje uređajem</h1>
+<div id="upr">
 
-                <div class="form-check col form-switch text-light">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    role="switch"
-                    id="R2akt"
-                  />
-                  <label class="form-check-label" for="R2akt">R2</label>
-                </div>
+    <div id="config">
+        <div class="uprData" style="text-align: center;">izvori točnog vremena</div>
+        <form>
+            <div><input type="checkbox" id="GPSakt" name="GPSakt"><label for="GPSakt">Aktiviraj GPS</label></div>
+            <div><input type="checkbox" id="NTPakt" name="NTPakt"><label for="NTPakt">Aktiviraj NTP</label></div>
+            <div class="uprData" style="text-align: center;">Relejni izlazi:</div>
 
-                <div class="form-check col form-switch text-light">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    role="switch"
-                    id="R3akt"
-                  />
-                  <label class="form-check-label" for="R3akt">R3</label>
-                </div>
+            <div><input type="checkbox" id="R1akt" name="R1akt"> <label for="R1akt">Aktiviraj izlaz R1</label></div>
+            <div><input type="checkbox" id="R2akt" name="R2akt"> <label for="R2akt">Aktiviraj izlaz R2</label></div>
+            <div><input type="checkbox" id="ZLakt" name="ZLakt"> <label for="ZLakt">Aktiviraj  zimsko ljetno vrijeme</label></div>
 
-                <div class="form-check col form-switch text-light">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    role="switch"
-                    id="R4akt"
-                  />
-                  <label class="form-check-label" for="R4akt">R4</label>
-                </div>
-
-                <div class="form-check col form-switch text-light">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    role="switch"
-                    id="R5akt"
-                  />
-                  <label class="form-check-label" for="R5akt">R5</label>
-                </div>
-
-                <div class="form-check col form-switch text-light">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    role="switch"
-                    id="R6akt"
-                  />
-                  <label class="form-check-label" for="R6akt">R6</label>
-                </div>
-              </div>
-              <button
-                type="button"
-                style="margin-top: 50px"
-                id="SubmitBut"
-                class="btn btn-danger"
-              >
-                Save settings
-              </button>
+            <div id="timeZone">
+                <label for="zoneSelect" id="zoneLabel">Vremenska zona:</label>
+                <select id="zoneSelect">
+                    <option value="0">UTC-12:00</option>
+                    <option value="1">UTC-11:00</option>
+                    <option value="2">UTC-10:00</option>
+                    <option value="3">UTC-09:00</option>
+                    <option value="4">UTC-08:00</option>
+                    <option value="5">UTC-07:00</option>
+                    <option value="6">UTC-06:00</option>
+                    <option value="7">UTC-05:00</option>
+                    <option value="8">UTC-04:00</option>
+                    <option value="9">UTC-03:00</option>
+                    <option value="10">UTC-02:00</option>
+                    <option value="11">UTC-01:00</option>
+                    <option value="12" selected>UTC</option>
+                    <option value="13">UTC+01:00</option>
+                    <option value="14">UTC+02:00</option>
+                    <option value="15">UTC+03:00</option>
+                    <option value="16">UTC+04:00</option>
+                    <option value="17">UTC+05:00</option>
+                    <option value="18">UTC+06:00</option>
+                    <option value="19">UTC+07:00</option>
+                    <option value="20">UTC+08:00</option>
+                    <option value="21">UTC+09:00</option>
+                    <option value="22">UTC+10:00</option>
+                    <option value="23">UTC+11:00</option>
+                    <option value="24">UTC+12:00</option>
+                    <option value="25">UTC+13:00</option>
+                    <option value="26">UTC+14:00</option>
+            </select>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div
-            class="card border border-3 border-danger bg-secondary rounded-3"
-          >
-            <div class="card-body">
-              <div class="row">
-                <h3 class="card-title text-light">Manual relay toggle</h3>
-                <div class="col d-grid justify-content-center">
-                  <div id="ind1" class="indication" id="r1"></div>
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-lg"
-                    aria-pressed="false"
-                    autocomplete="off"
-                    id="R1"
-                  >
-                    R1
-                  </button>
-                </div>
 
-                <div class="col d-grid justify-content-center">
-                  <div id="ind2" class="indication" id="r2"></div>
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-lg"
-                    aria-pressed="false"
-                    autocomplete="off"
-                    id="R2"
-                  >
-                    R2
-                  </button>
-                </div>
-                <div class="col d-grid justify-content-center">
-                  <div id="ind3" class="indication" id="r3"></div>
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-lg"
-                    aria-pressed="false"
-                    autocomplete="off"
-                    id="R3"
-                  >
-                    R3
-                  </button>
-                </div>
-                <div class="col d-grid justify-content-center">
-                  <div id="ind4" class="indication" id="r4"></div>
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-lg"
-                    aria-pressed="false"
-                    autocomplete="off"
-                    id="R4"
-                  >
-                    R4
-                  </button>
-                </div>
-                <div class="col d-grid justify-content-center">
-                  <div id="ind5" class="indication" id="r5"></div>
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-lg"
-                    aria-pressed="false"
-                    autocomplete="off"
-                    id="R5"
-                  >
-                    R5
-                  </button>
-                </div>
-                <div class="col d-grid justify-content-center">
-                  <div id="ind6" class="indication" id="r6"></div>
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-lg"
-                    aria-pressed="false"
-                    autocomplete="off"
-                    id="R6"
-                  >
-                    R6
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Footer -->
-      <div
-        class="text-center text-light mt-1 pt-2 border border-3 border-danger rounded-3"
-      >
-        <p>
-          Copyrights &copy; 2025
-          <a href="http://www.elak.hr/">ELAK d.o.o. KASTAV</a>
-        </p>
-        <p>
-          Frlani 10, HR51215 KASTAV, Hrvatska, Tel: +385 51 320 350,
-          elak@elak.hr
-        </p>
-      </div>
+            <div><input type="button"   id="SubmitBut" value="Pošalji konfiguraciju" class="relayButton" style="font-size: 15px; margin-top: 10px; margin-left: 80px; margin-bottom: 10px;"></div>
+        </form>
+        
     </div>
 
-    <script
-      src="/bootstrap/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+    <div id="data">
+        <div id="uprDataGPS" class="uprData">Zadnja GPS sink. [UTC]:</div>     <div id="GPS" class="uprData">00.00.0000 00:00:00</div><div><button id= "rstg" style="margin-left: 10px;" class="relayButton">GPS Reset</button></div>
+        <div id="uprDataNTP" class="uprData">Zadnja NTP sink. [UTC]:</div>     <div id="NTP" class="uprData">00.00.0000 00:00:00</div><div></div>
+        <div id="uprDataT" class="uprData">Ručni unos vremena [UTC]:</div>           <div id="time" class="uprData">00.00.0000 00:00:00</div><div></div>
+        <div id="uprDataR" class="uprData">R1 - R4 zahtijevano vrijeme:</div>           <div id="R" class="uprData">00.00.0000 00:00:00</div><div></div>
+        <div id="uprDataVb" class="uprData">Napon baterije:</div>                       <div id="Vb" class="uprData">0 Volts</div><div></div>
+        <div id="uprDataVs" class="uprData">Napon izvora:</div>                         <div id="Vs" class="uprData">0 Volts</div><div></div>
+        <div id="uprDataVt" class="uprData">Rad na baterijama:</div>                    <div id="Vt" class="uprData">0 min</div><div></div>
+        <div><button id= "rstr" class="relayButton" style="margin-left: 50px;">Poništi vrijeme rada na baterijama</button></div><div></div><div></div>
+    </div>
+ 
+    <div id="toggleRelay">
+        <div id="ind1" class="indication" id="r1"></div>
+        <div id="ind2" class="indication" id="r2"></div>
+        
+        <button id="R1" class="relayButton">R1</button>
+        <button id="R2" class="relayButton">R2</button>
+    </div>
+</div>
+</div>
+
+~inc:footer.inc~
+
 <script language="javascript">
-  var relay1 = document.getElementById("R1");
-  var relay2 = document.getElementById("R2");
-  var relay3 = document.getElementById("R3");
-  var relay4 = document.getElementById("R4");
-  var relay5 = document.getElementById("R5");
-  var relay6 = document.getElementById("R6");
-
-  relay1.onclick = function () {
-    setTimeout("newAJAXCommand('/admin/rly.cgi?relay=1',false)", 500);
-  };
-  relay2.onclick = function () {
-    setTimeout("newAJAXCommand('/admin/rly.cgi?relay=2',false)", 500);
-  };
-  relay3.onclick = function () {
-    setTimeout("newAJAXCommand('/admin/rly.cgi?relay=3',false)", 500);
-  };
-  relay4.onclick = function () {
-    setTimeout("newAJAXCommand('/admin/rly.cgi?relay=4',false)", 500);
-  };
-  relay5.onclick = function () {
-    setTimeout("newAJAXCommand('/admin/rly.cgi?relay=5',false)", 500);
-  };
-  relay6.onclick = function () {
-    setTimeout("newAJAXCommand('/admin/rly.cgi?relay=6',false)", 500);
-  };
-
-  function update(xmlData) {
-    var str = getXMLValue(xmlData, "rl14");
-    var statusR1 = str[0];
-    var statusR2 = str[2];
-    var statusR3 = str[4];
-    var statusR4 = str[6];
-    var statusR5 = str[8];
-    var statusR6 = str[10];
-
-    var ind1 = document.getElementById("ind1");
-    var ind2 = document.getElementById("ind2");
-    var ind3 = document.getElementById("ind3");
-    var ind4 = document.getElementById("ind4");
-    var ind5 = document.getElementById("ind5");
-    var ind6 = document.getElementById("ind6");
-
-    if (statusR1 == "1") {
-      ind1.style.backgroundColor = "green";
-    } else {
-      ind1.style.backgroundColor = "";
+    
+    var relay1= document.getElementById("R1");
+    var relay2= document.getElementById("R2");
+    var rstg= document.getElementById("rstg");
+    
+    relay1.onclick= function(){
+        setTimeout("newAJAXCommand('/admin/rly.cgi?relay=1',false)", 500);
+    }
+    relay2.onclick= function(){
+         setTimeout("newAJAXCommand('/admin/rly.cgi?relay=2',false)", 500);
     }
 
-    if (statusR2 == "1") {
-      ind2.style.backgroundColor = "green";
-    } else {
-      ind2.style.backgroundColor = "";
+    rstg.onclick= function(){
+        setTimeout("newAJAXCommand('/admin/flt.cgi?flt=g',false)", 500);
+    }
+    rstr.onclick= function(){
+        setTimeout("newAJAXCommand('/admin/flt.cgi?flt=r',false)", 500);
     }
 
-    if (statusR3 == "1") {
-      ind3.style.backgroundColor = "green";
-    } else {
-      ind3.style.backgroundColor = "";
+
+    function update(xmlData){ 
+        var str= getXMLValue(xmlData, 'rl14');
+
+        var sinkronizacijaGPS= getXMLValue(xmlData, 'gps');
+        sinkronizacijaGPS= sinkronizacijaGPS.split('  ');
+        sinkronizacijaGPSDatum= sinkronizacijaGPS[0].split('.');
+        sinkronizacijaGPSVrijeme= sinkronizacijaGPS[1].split(':');
+        sinkronizacijaGPSDatum.pop();
+
+        if(sinkronizacijaGPSDatum[0].length==1){
+            sinkronizacijaGPSStr= '0' + sinkronizacijaGPSDatum[0] + '.';
+        }else{
+            sinkronizacijaGPSStr= sinkronizacijaGPSDatum[0] + '.';
+        }
+
+        if(sinkronizacijaGPSDatum[1].length==1){
+            sinkronizacijaGPSStr+= '0' + sinkronizacijaGPSDatum[1] + '.';
+        }else{
+            sinkronizacijaGPSStr+= sinkronizacijaGPSDatum[1] + '.';
+        }
+
+        sinkronizacijaGPSStr+= sinkronizacijaGPSDatum[2] + '.  ';
+
+        if(sinkronizacijaGPSVrijeme[0].length==1){
+            sinkronizacijaGPSStr+= '0' + sinkronizacijaGPSVrijeme[0] + ':';
+        }else{
+            sinkronizacijaGPSStr+= sinkronizacijaGPSVrijeme[0] + ':';
+        }
+
+        if(sinkronizacijaGPSVrijeme[1].length==1){
+            sinkronizacijaGPSStr+= '0' + sinkronizacijaGPSVrijeme[1] + ':';
+        }else{
+            sinkronizacijaGPSStr+= sinkronizacijaGPSVrijeme[1] + ':';
+        }
+
+        if(sinkronizacijaGPSVrijeme[2].length==1){
+            sinkronizacijaGPSStr+= '0' + sinkronizacijaGPSVrijeme[2];
+        }else{
+            sinkronizacijaGPSStr+= sinkronizacijaGPSVrijeme[2];
+        }
+
+        if(sinkronizacijaGPSStr=='00.00.2000.  00:00:00'){
+            sinkronizacijaGPSStr='-- -- ----  -- -- --';
+        }
+
+        document.getElementById("GPS").innerHTML= sinkronizacijaGPSStr;
+        
+        var sinkronizacijaNTP= getXMLValue(xmlData, 'ntp');
+        sinkronizacijaNTP= sinkronizacijaNTP.split('  ');
+        sinkronizacijaNTPDatum= sinkronizacijaNTP[0].split('.');
+        sinkronizacijaNTPVrijeme= sinkronizacijaNTP[1].split(':');
+        sinkronizacijaNTPDatum.pop();
+
+        if(sinkronizacijaNTPDatum[0].length==1){
+            sinkronizacijaNTPStr= '0' + sinkronizacijaNTPDatum[0] + '.';
+        }else{
+            sinkronizacijaNTPStr= sinkronizacijaNTPDatum[0] + '.';
+        }
+
+        if(sinkronizacijaNTPDatum[1].length==1){
+            sinkronizacijaNTPStr+= '0' + sinkronizacijaNTPDatum[1] + '.';
+        }else{
+            sinkronizacijaNTPStr+= sinkronizacijaNTPDatum[1] + '.';
+        }
+
+        sinkronizacijaNTPStr+= sinkronizacijaNTPDatum[2] + '.  ';
+
+        if(sinkronizacijaNTPVrijeme[0].length==1){
+            sinkronizacijaNTPStr+= '0' + sinkronizacijaNTPVrijeme[0] + ':';
+        }else{
+            sinkronizacijaNTPStr+= sinkronizacijaNTPVrijeme[0] + ':';
+        }
+
+        if(sinkronizacijaNTPVrijeme[1].length==1){
+            sinkronizacijaNTPStr+= '0' + sinkronizacijaNTPVrijeme[1] + ':';
+        }else{
+            sinkronizacijaNTPStr+= sinkronizacijaNTPVrijeme[1] + ':';
+        }
+
+        if(sinkronizacijaNTPVrijeme[2].length==1){
+            sinkronizacijaNTPStr+= '0' + sinkronizacijaNTPVrijeme[2];
+        }else{
+            sinkronizacijaNTPStr+= sinkronizacijaNTPVrijeme[2];
+        }
+
+        if(sinkronizacijaNTPStr=='00.00.2000.  00:00:00'){
+            sinkronizacijaNTPStr='-- -- ----  -- -- --';
+        }
+
+        document.getElementById("NTP").innerHTML= sinkronizacijaNTPStr;
+
+        var sinkronizacijaMAN= getXMLValue(xmlData, 'man');
+        sinkronizacijaMAN= sinkronizacijaMAN.split('  ');
+        sinkronizacijaMANDatum= sinkronizacijaMAN[0].split('.');
+        sinkronizacijaMANVrijeme= sinkronizacijaMAN[1].split(':');
+        sinkronizacijaMANDatum.pop();
+
+        if(sinkronizacijaMANDatum[0].length==1){
+            sinkronizacijaMANStr= '0' + sinkronizacijaMANDatum[0] + '.';
+        }else{
+            sinkronizacijaMANStr= sinkronizacijaMANDatum[0] + '.';
+        }
+
+        if(sinkronizacijaMANDatum[1].length==1){
+            sinkronizacijaMANStr+= '0' + sinkronizacijaMANDatum[1] + '.';
+        }else{
+            sinkronizacijaMANStr+= sinkronizacijaMANDatum[1] + '.';
+        }
+
+        sinkronizacijaMANStr+= sinkronizacijaMANDatum[2] + '.  ';
+
+        if(sinkronizacijaMANVrijeme[0].length==1){
+            sinkronizacijaMANStr+= '0' + sinkronizacijaMANVrijeme[0] + ':';
+        }else{
+            sinkronizacijaMANStr+= sinkronizacijaMANVrijeme[0] + ':';
+        }
+
+        if(sinkronizacijaMANVrijeme[1].length==1){
+            sinkronizacijaMANStr+= '0' + sinkronizacijaMANVrijeme[1] + ':';
+        }else{
+            sinkronizacijaMANStr+= sinkronizacijaMANVrijeme[1] + ':';
+        }
+
+        if(sinkronizacijaMANVrijeme[2].length==1){
+            sinkronizacijaMANStr+= '0' + sinkronizacijaMANVrijeme[2];
+        }else{
+            sinkronizacijaMANStr+= sinkronizacijaMANVrijeme[2];
+        }
+        if(sinkronizacijaMANStr=='00.00.2000.  00:00:00'){
+            sinkronizacijaMANStr='-- -- ----  -- -- --';
+        }
+    
+        document.getElementById("time").innerHTML= sinkronizacijaMANStr;
+
+        var sinkronizacijaRTIM= getXMLValue(xmlData, 'rtim');
+        sinkronizacijaRTIM= sinkronizacijaRTIM.split('  ');
+        sinkronizacijaRTIMDatum= sinkronizacijaRTIM[0].split('.');
+        sinkronizacijaRTIMVrijeme= sinkronizacijaRTIM[1].split(':');
+        sinkronizacijaRTIMDatum.pop();
+
+        if(sinkronizacijaRTIMDatum[0].length==1){
+            sinkronizacijaRTIMStr= '0' + sinkronizacijaRTIMDatum[0] + '.';
+        }else{
+            sinkronizacijaRTIMStr= sinkronizacijaRTIMDatum[0] + '.';
+        }
+
+        if(sinkronizacijaRTIMDatum[1].length==1){
+            sinkronizacijaRTIMStr+= '0' + sinkronizacijaRTIMDatum[1] + '.';
+        }else{
+            sinkronizacijaRTIMStr+= sinkronizacijaRTIMDatum[1] + '.';
+        }
+
+        sinkronizacijaRTIMStr+= sinkronizacijaRTIMDatum[2] + '.  ';
+
+        if(sinkronizacijaRTIMVrijeme[0].length==1){
+            sinkronizacijaRTIMStr+= '0' + sinkronizacijaRTIMVrijeme[0] + ':';
+        }else{
+            sinkronizacijaRTIMStr+= sinkronizacijaRTIMVrijeme[0] + ':';
+        }
+
+        if(sinkronizacijaRTIMVrijeme[1].length==1){
+            sinkronizacijaRTIMStr+= '0' + sinkronizacijaRTIMVrijeme[1] + ':';
+        }else{
+            sinkronizacijaRTIMStr+= sinkronizacijaRTIMVrijeme[1] + ':';
+        }
+
+        if(sinkronizacijaMANVrijeme[2].length==1){
+            sinkronizacijaRTIMStr+= '0' + sinkronizacijaMANVrijeme[2];
+        }else{
+            sinkronizacijaRTIMStr+= sinkronizacijaMANVrijeme[2];
+        }
+        if(sinkronizacijaRTIMStr=='00.00.200.  00:00:00'){
+            sinkronizacijaRTIMStr='-- -- ----  -- -- --';
+        }
+
+        document.getElementById("R").innerHTML= sinkronizacijaRTIMStr;
+        
+        document.getElementById("Vb").innerHTML= getXMLValue(xmlData, 'nbat');
+        document.getElementById("Vs").innerHTML= getXMLValue(xmlData, 'nnap');
+        document.getElementById("Vt").innerHTML= getXMLValue(xmlData, 'bnap');
+      
+        var statusR1= str[0];
+        var statusR2= str[2];
+
+        var ind1= document.getElementById("ind1");
+        var ind2= document.getElementById("ind2");
+        var ind3= document.getElementById("ind3");
+        var ind4= document.getElementById("ind4");
+        
+        if(statusR1== '1'){
+            ind1.style.backgroundColor= 'green';
+        }else{
+            ind1.style.backgroundColor= '';
+        }
+
+        if(statusR2== '1'){
+            ind2.style.backgroundColor= 'green';
+        }else{
+            ind2.style.backgroundColor= '';
+        }
+
+        if(document.getElementById('GPSakt').checked== true){
+            var povezanostGPS= getXMLValue(xmlData, 'checkGPS');
+            console.log(povezanostGPS);
+            if(povezanostGPS== 86){
+                document.getElementById('GPS').style.backgroundColor= 'red';
+            }else if(povezanostGPS== 65){
+				document.getElementById('GPS').removeAttribute('style');
+            }else if(povezanostGPS== 32){
+                document.getElementById('GPS').removeAttribute('style');
+				document.getElementById('GPS').style.color= 'red';
+        }else{
+            document.getElementById('GPS').removeAttribute('style');
+        }
+        
+    }
     }
 
-    if (statusR4 == "1") {
-      ind4.style.backgroundColor = "green";
-    } else {
-      ind4.style.backgroundColor = "";
-    }
-    if (statusR5 == "1") {
-      ind5.style.backgroundColor = "green";
-    } else {
-      ind5.style.backgroundColor = "";
-    }
-    if (statusR6 == "1") {
-      ind6.style.backgroundColor = "green";
-    } else {
-      ind6.style.backgroundColor = "";
-    }
-  }
-  setTimeout("newAJAXCommand('/upr.xml', update, true)", 500);
-  var submitbut = document.getElementById("SubmitBut");
+    setTimeout("newAJAXCommand('upr.xml', update, true)",500);
 
-  submitbut.onclick = function () {
-    let arrCheck = "";
+    var submitbut= document.getElementById("SubmitBut");
+    
 
-    if (document.querySelector("#R1akt").checked) {
-      arrCheck += "1";
-    } else {
-      arrCheck += "0";
-    }
-    arrCheck += ",";
-    if (document.querySelector("#R2akt").checked) {
-      arrCheck += "1";
-    } else {
-      arrCheck += "0";
-    }
-    arrCheck += ",";
-    if (document.querySelector("#R3akt").checked) {
-      arrCheck += "1";
-    } else {
-      arrCheck += "0";
-    }
-    arrCheck += ",";
-    if (document.querySelector("#R4akt").checked) {
-      arrCheck += "1";
-    } else {
-      arrCheck += "0";
-    }
-    arrCheck += ",";
-    if (document.querySelector("#R5akt").checked) {
-      arrCheck += "1";
-    } else {
-      arrCheck += "0";
-    }
-    arrCheck += ",";
-    if (document.querySelector("#R6akt").checked) {
-      arrCheck += "1";
-    } else {
-      arrCheck += "0";
+    
+    submitbut.onclick= function(){
+        let arrCheck= '';
+
+        if(document.querySelector("#GPSakt").checked){
+            arrCheck+= '1';
+        }else{
+            arrCheck+= '0';
+        }
+        arrCheck+= ',';
+        if(document.querySelector("#NTPakt").checked){
+            arrCheck+= '1';
+        }else{
+            arrCheck+= '0';
+        }
+        arrCheck+= ',';
+        if(document.querySelector("#R1akt").checked){
+            arrCheck+= '1';
+        }else{
+            arrCheck+= '0';
+        }
+        arrCheck+= ',';
+        if(document.querySelector("#R2akt").checked){
+            arrCheck+= '1';
+        }else{
+            arrCheck+= '0';
+        }
+        arrCheck+= ',';
+        if(document.querySelector("#ZLakt").checked){
+            arrCheck+= '1';
+        }else{
+            arrCheck+= '0';
+        }
+        arrCheck+= ',';
+        
+
+        var selectElement= document.getElementById("zoneSelect");
+        var selectedOption= selectElement.options[selectElement.selectedIndex].value;
+    
+        arrCheck= arrCheck + selectedOption;
+        const endpoint= `/admin/upr.cgi?upr=${arrCheck}`;
+        
+        fetch(endpoint,{
+            method: 'POST'
+        })
+        .then(response=>{response.json();})
+        .then(data => {console.log('Data received:', data);})
+        .catch(error => {console.error('Error during fetch:', error);})
     }
 
-    const endpoint = `/admin/upr.cgi?upr=${arrCheck}`;
+    window.onload = function(){
+        activeTab();
+        newAJAXCommand('uconf.xml', pullSavedData, false); 
+    }
+    function pullSavedData(xmlData) {
+        var dataSaved= getXMLValue(xmlData, 'uconf');
 
-    fetch(endpoint, {
-      method: "POST",
-    })
-      .then((response) => {
-        response.json();
-      })
-      .then((data) => {
-        console.log("Data received:", data);
-      })
-      .catch((error) => {
-        console.error("Error during fetch:", error);
-      });
-  };
+        if(dataSaved[0]=='1'){
+            document.getElementById('GPSakt').checked= true;
+        }
+        if(dataSaved[2]=='1'){
+            document.getElementById('NTPakt').checked= true;
+        }
+        if(dataSaved[4]=='1'){
+            document.getElementById('R1akt').checked= true;
+        }
+        if(dataSaved[6]=='1'){
+            document.getElementById('R2akt').checked= true;
+        }
+        if(dataSaved[12]=='1'){
+            document.getElementById('ZLakt').checked= true;
+        }
+        if(dataSaved[15]==null){
+            document.getElementById('zoneSelect').value= dataSaved[14];
+        }else{
+            document.getElementById('zoneSelect').value= dataSaved[14] + dataSaved[15];
+        }
+    };
 
-  window.onload = function () {
-    activeTab();
-    newAJAXCommand("uconf.xml", pullSavedData, false);
-  };
-  function pullSavedData(xmlData) {
-    var dataSaved = getXMLValue(xmlData, "uconf");
 
-    if (dataSaved[4] == "1") {
-      document.getElementById("R1akt").checked = true;
+        
+    /*----------------------*/
+    /*function updateSubmit(xmlData){
+        var podaci= getXMLValue(xmlData, 'uconf');
+        //console.log(podaci);
     }
-    if (dataSaved[6] == "1") {
-      document.getElementById("R2akt").checked = true;
-    }
-    if (dataSaved[8] == "1") {
-      document.getElementById("R3akt").checked = true;
-    }
-    if (dataSaved[10] == "1") {
-      document.getElementById("R4akt").checked = true;
-    }
-    if (dataSaved[12] == "1") {
-      document.getElementById("R5akt").checked = true;
-    }
-    if (dataSaved[14] == "1") {
-      document.getElementById("R6akt").checked = true;
-    }
-  }
+    //setTimeout("newAJAXCommand('uconf.xml', updateSubmit, true)",5000);*/
+    /*----------------------*/
+
 </script>
+
 <style>
-  .indication {
-    margin-top: 27px;
-    margin-bottom: 5px;
-    padding: 10px 15px;
-    background-color: white;
-    border: 2px solid;
-    border-radius: 5px;
-    width: 56px;
-    height: 50px;
-  }
+
+    #timeZone {
+        margin-top: 5px;
+    }
+
+    #zoneLabel{
+        border:2px solid #8b0000;
+        border-radius: 10px;
+        padding: 5px;
+    }
+
+    #config {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: repeat(11,auto);
+        border: 2px solid;
+        border-radius: 10px;
+        padding: 5px;
+    }
+
+    #upr {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto;
+    }
+
+
+    #data {
+        padding: 1px;
+        display: grid;
+        grid-template-columns: 250px 200px 150px;
+        grid-template-rows: 30px 30px 30px 30px 30px 30px 30px 50px;
+        gap: 2px;
+        align-items: center;
+    }
+
+
+    #toggleRelay {
+        display: grid; 
+        grid-template-columns: repeat(4, 45px); 
+        grid-template-rows: repeat(2, 45px); 
+         
+        padding: 5px; 
+        width: 160px; 
+        height: 80px;
+    }
+
+    #GPS, #NTP, #time, #R, #Vb, #Vs, #Vt{
+        text-align: center;
+    }
+    #rstg, #rstr {
+        width: 155px;
+        font-size: 12px;
+    }
+
+    .uprData {
+        border:2px solid #8b0000;
+        border-radius: 10px;
+        margin: 2px;
+        text-align: right;
+        padding: 5px;
+    }
+
+    .relayButton {
+	margin: 2px;
+	padding: 5px 10px;
+	font-size: 10px; 
+	background-color: #8b0000; 
+	color: white; 
+	border-radius: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+    .relayButton:hover {
+        background-color: gray;
+    }
+    .indication {
+        margin: 2px;
+        padding: 10px 15px;
+        background-color: white;
+        border: 2px solid;
+        border-radius: 5px;
+    }
 </style>

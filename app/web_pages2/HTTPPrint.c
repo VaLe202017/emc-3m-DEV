@@ -13,7 +13,15 @@ extern volatile bool cmdAnswerValid;
 
 // Stick status message variable.  See lastSuccess for details.
 static BOOL lastFailure = FALSE;
-
+/*
+void HTTPPrint_status_fail() {
+    if (lastFailure)
+        TCPPutROMString(sktHTTP, (ROM BYTE*) "block");
+    else
+        TCPPutROMString(sktHTTP, (ROM BYTE*) "none");
+    lastFailure = FALSE;
+}
+*/
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 void ClearNetBIOSName(BYTE Name[]) {
     BYTE i;
@@ -286,7 +294,7 @@ void HTTPPrint_rebootaddr() {
 }
 
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
-void HTTPPrint_time() {
+void HTTPPrint_time() {/*
     curHTTP.callbackPos = 0x01;
     if (TCPIsPutReady(sktHTTP) < 25)
         return;
@@ -323,6 +331,33 @@ void HTTPPrint_time() {
     if (vrijeme.minuta < 10) {
         TCPPutROMString(sktHTTP, (ROM void*) "0");
     }
+    TCPPutString(sktHTTP, digits);
+    TCPPutROMString(sktHTTP, (ROM void*) ":");
+    my_uitoa(vrijeme.sekunda, digits);
+    TCPPutString(sktHTTP, digits);*/
+    curHTTP.callbackPos = 0x01;
+    if (TCPIsPutReady(sktHTTP) < 25)
+        return;
+    curHTTP.callbackPos = 0x00;
+
+    BYTE digits[10];
+
+    uitoa(vrijeme.dan, digits);
+    TCPPutString(sktHTTP, digits);
+    TCPPutROMString(sktHTTP, (ROM void*) ".");
+
+    uitoa(vrijeme.mjesec, digits);
+    TCPPutString(sktHTTP, digits);
+    TCPPutROMString(sktHTTP, (ROM void*) ".");
+
+    uitoa(vrijeme.godina + 2000, digits);
+    TCPPutString(sktHTTP, digits);
+    TCPPutROMString(sktHTTP, (ROM void*) ". ");
+
+    uitoa(vrijeme.sat, digits);
+    TCPPutString(sktHTTP, digits);
+    TCPPutROMString(sktHTTP, (ROM void*) ":");
+    uitoa(vrijeme.minuta, digits);
     TCPPutString(sktHTTP, digits);
     TCPPutROMString(sktHTTP, (ROM void*) ":");
     my_uitoa(vrijeme.sekunda, digits);
@@ -993,14 +1028,14 @@ void HTTPPrint_sync(void) {
 
     curHTTP.callbackPos = 0x00;
 }
-
+/*----------------------------------------------------------------------------*/
 void HTTPPrint_ien(void) {
     UINT16 num;
     num = AppConfig.implSet[1].isEnabled;
     // Print the output
     TCPPut(sktHTTP, (num ? '1' : '0'));
 }
-
+/*----------------------------------------------------------------------------*/
 void HTTPPrint_imp(UINT16 num) {
     curHTTP.callbackPos = 0x01;
     if (TCPIsPutReady(sktHTTP) < 15)
@@ -1056,7 +1091,7 @@ void HTTPPrint_imp(UINT16 num) {
     uitoa(num, digits);
     TCPPutString(sktHTTP, digits);
 }
-
+/*----------------------------------------------------------------------------*/
 void HTTPPrint_tim(UINT16 num) {
     curHTTP.callbackPos = 0x01;
     if (TCPIsPutReady(sktHTTP) < 8)
@@ -1102,7 +1137,7 @@ void HTTPPrint_tim(UINT16 num) {
     uitoa(num, digits);
     TCPPutString(sktHTTP, digits);
 }
-
+/*----------------------------------------------------------------------------*/
 void HTTPPrint_iconf(UINT16 num) {
 
     curHTTP.callbackPos = 0x01;
@@ -1164,3 +1199,4 @@ void HTTPPrint_iconf(UINT16 num) {
     uitoa(num, digits);
     TCPPutString(sktHTTP, digits);
 }
+/*----------------------------------------------------------------------------*/

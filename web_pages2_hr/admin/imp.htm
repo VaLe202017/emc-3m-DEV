@@ -516,6 +516,7 @@ function updateTimeAndPositon(xmlData){/*Ovdje je jos error checking*/
 	var minutes1= Math.floor((tim1 - (hours1 * 3600)) / 60);
 	var seconds1= tim1 - ((hours1 * 3600) + (minutes1 * 60));
 	document.getElementById('zahtijevanoVrijeme1').innerHTML= hours1 + ':' + minutes1 + ':' + seconds1;
+	console.log("Zahtj vrijeme: " +tim1+"--------------------------------------")
 
 	// Zahtijevano vrijeme za I2
 	var tim2= getXMLValue(xmlData, 'tim2');

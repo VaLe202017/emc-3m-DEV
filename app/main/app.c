@@ -13,6 +13,7 @@
 #define THIS_IS_STACK_APPLICATION
 
 #include "app.h"
+#include "mcp.h"
 
 #include <stdio.h>
 
@@ -36,6 +37,8 @@ static pt_t pt_impulse1;
 static pt_t pt_impulse2;
 static pt_t pt_device;
 volatile UINT gMinuitFlag = 0;
+
+static BOOL impPlugged;
 
 static uint16_t ptFlag;
 
@@ -77,9 +80,9 @@ void rst_pt_device(void) {
 int main(void) {
 
     sys_io_init();
-    
+
     AppConfig.ID = 0xFF;
-    
+
     cmndW_data_int();
 
     //app_defaults_load();
@@ -122,20 +125,28 @@ int main(void) {
     sys_t1_init();
 
     TickInit(); // Inicijalizacija brojaca vremena
-    
+
     rst_pt_device();
     rst_pt_imp1();
     rst_pt_imp2();
-    
+
     implWaitSem = 0;
 
+    /*impPlugged = mcp_flt_is_pluged();
+    if (impPlugged == TRUE) {
+        mcp_flt_init();
+    }*/
+    AppConfig.implSet[2].implMode=1;
+    mcp_flt_init();
     
+
     ds_check_new_time();
-    
+
     prgm_init_pt();
     for (;;) {
         ClearWDT();
         // service tasks
+        app_fault(&pt_fault);
         ethernet_task(&pt_ethernet);
         app_cmndW(&pt_cmndW);
         prgm_run_pt();

@@ -10,8 +10,30 @@ void cgi_upr(BYTE *prt) {
 
     static UINT indx;
     static char str[10];
-    static UINT r[7];
+    static UINT gps;
+    static UINT ntp;
+    static UINT r[5];
+    static UINT daylight;
+    static UINT timezone;
 
+    indx = 0;
+    do {
+        str[indx] = *prt++;
+        indx++;
+    } while (*prt != ',');
+    str[indx] = '\0';
+    gps = atol(str);
+
+    prt++;
+    indx = 0;
+    do {
+        str[indx] = *prt++;
+        indx++;
+    } while (*prt != ',');
+    str[indx] = '\0';
+    ntp = atol(str);
+
+    prt++;
     indx = 0;
     do {
         str[indx] = *prt++;
@@ -54,7 +76,7 @@ void cgi_upr(BYTE *prt) {
         indx++;
     } while (*prt != ',');
     str[indx] = '\0';
-    r[5] = atol(str);
+    daylight = atol(str);
 
     prt++;
     indx = 0;
@@ -63,12 +85,16 @@ void cgi_upr(BYTE *prt) {
         indx++;
     } while (*prt != '\0');
     str[indx] = '\0';
-    r[6] = atol(str);
+    timezone = atol(str);
 
 
 
+    AppConfig.gpsIsEnabled = gps;
+    AppConfig.ntpIsEnabled = ntp;
     AppConfig.relay1IsEnabled = r[1];
     AppConfig.relay2IsEnabled = r[2];
+    AppConfig.relayDayLight = daylight;
+    AppConfig.relayTimezone = (INT) timezone - 12;
 
 
 
@@ -80,6 +106,7 @@ void cgi_upr(BYTE *prt) {
         ZVN_clr(ZVONO2);
         gSignal2 = -1;
     }
+    CLOCK_UPDATE_FROM_DS;
     APP_SaveSettings();
 
 

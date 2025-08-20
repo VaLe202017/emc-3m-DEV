@@ -19,24 +19,18 @@ void sys_int4_init() {
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 // brojac sekundi       !!!
-void __ISR(_EXTERNAL_0_VECTOR, IPL(SYS_INT4_IPL)) _Extrnal0IntHandler(void) {
+void __ISR(_EXTERNAL_0_VECTOR, IPL(SYS_INT0_IPL)) _Extrnal0IntHandler(void) {
     INTClearFlag(INT_INT0);
-    int4Signal++;
+    impl_inc_time();
     vrijeme.sekunda++;
     if (vrijeme.sekunda >= 60U) {
         vrijeme.sekunda = 0U;
-        gMinuitFlag=1;
-        ds3231_time_get(&vrijeme);
-        sat_toLocal(&vrijeme, AppConfig.ClockTimeZone, AppConfig.ClockDayLightSaving);
-        switch (AppConfig.ClockTimeFormat) {
-            case TIMEFORMAT_12H:
-                vrijeme.sat = vrijeme.sat % 12;
-                break;
-            case TIMEFORMAT_24H:
-                break;
-        }
+        gMinuitFlag++;
     }
+    vrijemeI1.sekunda = vrijeme.sekunda;
+    vrijemeI2.sekunda = vrijeme.sekunda;
     
+    int4Signal++;
 }
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 uint8_t sys_int4Signal_get() {

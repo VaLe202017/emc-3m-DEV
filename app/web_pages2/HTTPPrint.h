@@ -45,7 +45,6 @@
 #define __HTTPPRINT_H
 
 #include "app.h"
-//#include "TCPIP Stack/TCPIP.h"
 
 #if defined(STACK_USE_HTTP2_SERVER)
 
@@ -100,6 +99,11 @@ void HTTPPrint_humidSel(WORD);
 void HTTPPrint_humidStatic(void);
 void HTTPPrint_uconf(void);
 void HTTPPrint_iconf(WORD);
+void HTTPPrint_zadman(void);
+void HTTPPrint_rtim(void);
+void HTTPPrint_nbat(void);
+void HTTPPrint_nnap(void);
+void HTTPPrint_bnap(void);
 
 void HTTPPrint(DWORD callbackID)
 {
@@ -464,6 +468,21 @@ void HTTPPrint(DWORD callbackID)
 			break;
         case 0x00000077:
 			HTTPPrint_iconf(8);
+			break;
+        case 0x00000078:
+			HTTPPrint_zadman();
+			break;
+        case 0x00000079:
+			HTTPPrint_rtim();
+			break;
+        case 0x0000007a:
+			HTTPPrint_nbat();
+			break;
+        case 0x0000007b:
+			HTTPPrint_nnap();
+			break;
+        case 0x0000007c:
+			HTTPPrint_bnap();
 			break;
 		default:
 			// Output notification for undefined values

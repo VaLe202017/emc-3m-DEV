@@ -69,6 +69,9 @@ APP_EXT bool gHSStatic;
 APP_EXT uint8_t appTimerFlag;
 APP_EXT uint8_t appTimer[APP_TIMER_STR_SIZE];
 static cmndBuf_t webBuf[GPS_QUEUE_SIZE];
+/*----------------------------------------------------------------------------*/
+//interupt levels
+#define SYS_CN_IPL      5
 
 /*----------------------------------------------------------------------------*/
 #define FIRMWARE_VERSION        "V1.0"
@@ -192,11 +195,11 @@ void drv_eds_timer_set();
 void rst_pt_imp1();
 void rst_pt_imp2();
 
-//APP_EXT datumvrijeme_t vrijeme;
+APP_EXT datumvrijeme_t vrijeme;
 APP_EXT datumvrijeme_t vrijemeI1;
 APP_EXT datumvrijeme_t vrijemeI2;
 APP_EXT datumvrijeme_t rlyVrijeme;
 
-//extern volatile UINT gMinuitFlag;
+PT_THREAD(app_fault(pt_t *pt));
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/
 #endif // _APP_H_

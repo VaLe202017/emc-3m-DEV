@@ -1,0 +1,11 @@
+<response>
+<gps>~zadgps~</gps>
+<ntp>~zadntp~</ntp>
+<man>~zadman~</man>
+<rtim>~rtim~</rtim>
+<nbat>~nbat~</nbat>
+<nnap>~nnap~</nnap>
+<bnap>~bnap~</bnap>
+<rl14>~rl14~</rl14>
+<checkGPS>~checkSincronization~</checkGPS>
+</response>
