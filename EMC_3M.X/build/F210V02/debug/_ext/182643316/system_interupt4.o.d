@@ -1,4 +1,4 @@
-build/F210V02/production/_ext/182643316/system_interupt4.o: \
+build/F210V02/debug/_ext/182643316/system_interupt4.o: \
  ../app/system/system_interupt4.c ../app/main/app.h \
  ../app/system/system.h ../app/system/system_io.h ../framework/std.h \
  ../framework/pt/pt.h ../framework/pt/lc.h ../framework/pt/lc-switch.h \

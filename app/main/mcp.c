@@ -19,7 +19,6 @@
 
 
 #define MCP_ADDRESS       0x40U //adress 000
-//#define MCP_FLT_ADDRESS   0x44U
 
 #define MCP_BUFSIZE        11U
 
@@ -28,11 +27,11 @@ static UINT8 MCPReg[MCP_BUFSIZE];
 /*----------------------------------------------------------------------------*/
 void mcp_impl_init(void) {
     rly_mirror = 0x00U;
-    
+
     MCPReg[MCP_IODIR] = B8(10001000); // 0 as output 1 as input
-    MCPReg[MCP_IPOL] = B8(10001000); // reflect the same logic state
+    MCPReg[MCP_IPOL] = B8(00000000); // reflect the same logic state
     MCPReg[MCP_GPINTEN ] = B8(10001000); // disable int on change
-    MCPReg[MCP_DEFVAL] = B8(00000000); //
+    MCPReg[MCP_DEFVAL] = B8(10001000); //
     MCPReg[MCP_INTCON] = B8(00000000); // comp agaist prev val.
     MCPReg[MCP_IOCON] = B8(00000000); //
     MCPReg[MCP_GPPU] = B8(10001000);
@@ -150,6 +149,30 @@ void mcp_set_polarity_lop2(void) {
 }
 
 /*----------------------------------------------------------------------------*/
+
+void mcp_rtry1_set() {
+    rly_mirror |= (1U << 2);
+    MCPReg[MCP_GPIO] = rly_mirror;
+    sys_iic3_write(MCP_ADDRESS, MCP_GPIO, &MCPReg[MCP_GPIO], 1);
+}
+
+void mcp_rtry1_clr() {
+    rly_mirror &= ~(1U << 2);
+    MCPReg[MCP_GPIO] = rly_mirror;
+    sys_iic3_write(MCP_ADDRESS, MCP_GPIO, &MCPReg[MCP_GPIO], 1);
+}
+void mcp_rtry2_set() {
+    rly_mirror |= (1U << 6);
+    MCPReg[MCP_GPIO] = rly_mirror;
+    sys_iic3_write(MCP_ADDRESS, MCP_GPIO, &MCPReg[MCP_GPIO], 1);
+}
+
+void mcp_rtry2_clr() {
+    rly_mirror &= ~(1U << 6);
+    MCPReg[MCP_GPIO] = rly_mirror;
+    sys_iic3_write(MCP_ADDRESS, MCP_GPIO, &MCPReg[MCP_GPIO], 1);
+}
+
 /*
 void mcp_flt_init(void) {
     MCPReg[MCP_IODIR] = B8(00111111);
@@ -169,6 +192,6 @@ void mcp_flt_init(void) {
 /*----------------------------------------------------------------------------*/
 UINT mcp_flt_read(void) {
     MCPReg[0] = 0x00U;
-    //sys_iic3_read(MCP_ADDRESS, MCP_GPIO, MCPReg, 11);
+    //sys_iic3_read(MCP_ADDRESS, MCP_INTF, MCPReg, 11);
     return (UINT) MCPReg[0];
 }

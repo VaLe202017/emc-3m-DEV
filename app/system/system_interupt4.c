@@ -3,6 +3,7 @@
  */
 
 #include "app.h"
+#include "mcp.h"
 
 static volatile uint8_t int4Signal = 0;
 static UINT faults;

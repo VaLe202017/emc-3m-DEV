@@ -11,8 +11,8 @@
 #define IMPL_BRK        mcp_set_polarity_brk1();//impl_il16_set(IMPL_INDX, IMP_BRK);
 #define IMPL_LOP        mcp_set_polarity_lop1();//impl_il16_set(IMPL_INDX, IMP_LOP);
 
-#define IMPL_RTY_SET    IMPL_LOP
-#define IMPL_RTY_CLR    IMPL_LOP
+#define IMPL_RTY_SET    mcp_rtry1_set();
+#define IMPL_RTY_CLR    mcp_rtry1_clr();
 
 #define IMPL_SET_POS    XCAT(XCAT(ds_setPos_, ),IMPL_INDX())
 #define IMPL_GET_POS    XCAT(XCAT(ds_getPos_, ),IMPL_INDX())

@@ -21,6 +21,11 @@ void mcp_set_polarity_pos2(void); //positive polarity impulse 2
 void mcp_set_polarity_brk2(void); //brake impulse 2
 void mcp_set_polarity_lop2(void); //low power coast impulse 2
 
+void mcp_rtry1_set(void);
+void mcp_rtry1_clr(void);
+void mcp_rtry2_set(void);
+void mcp_rtry2_clr(void);
+
 void mcp_flt_init(void);
 UINT mcp_flt_read(void);
 
