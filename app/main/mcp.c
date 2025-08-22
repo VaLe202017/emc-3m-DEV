@@ -19,7 +19,7 @@
 
 
 #define MCP_ADDRESS       0x40U //adress 000
-#define MCP_FLT_ADDRESS   0x44U
+//#define MCP_FLT_ADDRESS   0x44U
 
 #define MCP_BUFSIZE        11U
 
@@ -28,17 +28,30 @@ static UINT8 MCPReg[MCP_BUFSIZE];
 /*----------------------------------------------------------------------------*/
 void mcp_impl_init(void) {
     rly_mirror = 0x00U;
-    MCPReg[MCP_IODIR] = B8(00000000); // 0 as output 1 as input
-    MCPReg[MCP_IPOL] = B8(00000000); // reflect the same logic state
-    MCPReg[MCP_GPINTEN ] = B8(00000000); // disable int on change
+    
+    MCPReg[MCP_IODIR] = B8(10001000); // 0 as output 1 as input
+    MCPReg[MCP_IPOL] = B8(10001000); // reflect the same logic state
+    MCPReg[MCP_GPINTEN ] = B8(10001000); // disable int on change
     MCPReg[MCP_DEFVAL] = B8(00000000); //
     MCPReg[MCP_INTCON] = B8(00000000); // comp agaist prev val.
     MCPReg[MCP_IOCON] = B8(00000000); //
-    MCPReg[MCP_GPPU] = B8(00000000);
+    MCPReg[MCP_GPPU] = B8(10001000);
     MCPReg[MCP_INTF] = B8(00000000);
     MCPReg[MCP_INTCAP] = B8(00000000);
     MCPReg[MCP_GPIO] = B8(00000000);
     MCPReg[MCP_OLAT] = B8(00000000);
+    /*
+    MCPReg[MCP_IODIR] = B8(10001000); // 0 as output 1 as input
+    MCPReg[MCP_IPOL] = B8(10001000); // reflect the same logic state
+    MCPReg[MCP_GPINTEN ] = B8(10001000); // disable int on change
+    MCPReg[MCP_DEFVAL] = B8(00000000); //
+    MCPReg[MCP_INTCON] = B8(00000000); // comp agaist prev val.
+    MCPReg[MCP_IOCON] = B8(00000000); //
+    MCPReg[MCP_GPPU] = B8(10001000);
+    MCPReg[MCP_INTF] = B8(00000000);
+    MCPReg[MCP_INTCAP] = B8(00000000);
+    MCPReg[MCP_GPIO] = B8(00000000);
+    MCPReg[MCP_OLAT] = B8(00000000);*/
     sys_iic3_write(MCP_ADDRESS, MCP_IODIR, MCPReg, 11);
 }
 
@@ -137,7 +150,7 @@ void mcp_set_polarity_lop2(void) {
 }
 
 /*----------------------------------------------------------------------------*/
-
+/*
 void mcp_flt_init(void) {
     MCPReg[MCP_IODIR] = B8(00111111);
     MCPReg[MCP_IPOL] = B8(00000000);
@@ -151,97 +164,11 @@ void mcp_flt_init(void) {
     MCPReg[MCP_GPIO] = B8(00000000);
     MCPReg[MCP_OLAT] = B8(00000000);
     sys_iic3_write(MCP_FLT_ADDRESS, MCP_IODIR, MCPReg, 11);
-}
+}*/
 
 /*----------------------------------------------------------------------------*/
 UINT mcp_flt_read(void) {
     MCPReg[0] = 0x00U;
-    sys_iic3_read(MCP_FLT_ADDRESS, MCP_INTF, MCPReg, 1);
+    //sys_iic3_read(MCP_ADDRESS, MCP_GPIO, MCPReg, 11);
     return (UINT) MCPReg[0];
-}
-
-/*----------------------------------------------------------------------------*/
-BOOL mcp_flt_is_pluged(void) {
-    return sys_iic3_check(MCP_FLT_ADDRESS);
-}
-
-//test za provjeru faulta
-
-BOOL mcp_flt1_pressed(void) {
-    UINT flag = mcp_flt_read();
-    return (flag & (1 << 3)) != 0;
-}
-
-BOOL mcp_flt2_pressed(void) {
-    UINT flag = mcp_flt_read();
-    return (flag & (1 << 7)) != 0;
-}
-
-BOOL mcp_flt_pressed(void) {
-    UINT flag = mcp_flt_read();
-    return ((flag & (1 << 7))||(flag&(1<<3)) )!= 0;
-}
-
-
-/*----------------------------------------------------------------------------*/
-/*  Read MCP FLT GPIO state (PORTA)                                           */
-
-/*----------------------------------------------------------------------------*/
-UINT mcp_flt_read_intf(void) {
-    MCPReg[0] = 0x00U;
-    sys_iic3_read(MCP_FLT_ADDRESS, MCP_INTF, MCPReg, 1);
-
-    return (UINT) MCPReg[0]; // bit[0..7] = GPA0..7
-}
-
-/*----------------------------------------------------------------------------*/
-/*  FAULT1 on GPA3                                                            */
-
-/*----------------------------------------------------------------------------*/
-BOOL mcp_fault1_pressed(void) {
-    UINT val = mcp_flt_read_intf();
-
-    return ((val & (1 << 3)) == 0); // active LOW
-}
-
-/*----------------------------------------------------------------------------*/
-/*  FAULT2 on GPA7                                                            */
-
-/*----------------------------------------------------------------------------*/
-BOOL mcp_fault2_pressed(void) {
-    UINT val = mcp_flt_read_intf();
-
-    return ((val & (1 << 7)) == 0); // active LOW
-}
-
-/*----------------------------------------------------------------------------*/
-/*  RTRY1 on GPA2                                                             */
-
-/*----------------------------------------------------------------------------*/
-BOOL mcp_rtry1_pressed(void) {
-    UINT val = mcp_flt_read_intf();
-
-    return ((val & (1 << 2)) == 0); // active LOW
-}
-
-/*----------------------------------------------------------------------------*/
-/*  RTRY2 on GPA6                                                             */
-
-/*----------------------------------------------------------------------------*/
-BOOL mcp_rtry2_pressed(void) {
-    UINT val = mcp_flt_read_intf();
-
-    return ((val & (1 << 6)) == 0); // active LOW
-}
-
-UINT mcp_flt_status(void) {
-    UINT val = mcp_flt_read_intf();
-    UINT status = 0;
-
-    if ((val & (1 << 3)) == 0) status |= (1 << 0); // FAULT1
-    if ((val & (1 << 7)) == 0) status |= (1 << 1); // FAULT2
-    if ((val & (1 << 2)) == 0) status |= (1 << 2); // RTRY1
-    if ((val & (1 << 6)) == 0) status |= (1 << 3); // RTRY2
-
-    return status;
 }

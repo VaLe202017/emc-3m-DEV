@@ -73,6 +73,11 @@ static cmndBuf_t webBuf[GPS_QUEUE_SIZE];
 //interupt levels
 #define SYS_CN_IPL      5
 
+APP_EXT volatile BOOL gIsINTA_Low;
+#define _IS_INTA_PRESS          (gIsINTA_Low == true)
+#define _SET_INTA_PRESS         gIsINTA_Low = true
+#define _SET_INTA_RELEASE       gIsINTA_Low = false
+
 /*----------------------------------------------------------------------------*/
 #define FIRMWARE_VERSION        "V1.0"
 #define MY_DEFAULT_HOST_NAME    "EMC-3M dev"

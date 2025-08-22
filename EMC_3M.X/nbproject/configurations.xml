@@ -75,6 +75,7 @@
           <itemPath>../app/system/system_ser5.c</itemPath>
           <itemPath>../app/system/system_ser2.c</itemPath>
           <itemPath>../app/system/system_io.h</itemPath>
+          <itemPath>../app/system/system_interupt4.c</itemPath>
         </logicalFolder>
         <logicalFolder name="web_pages2" displayName="web_pages2" projectFiles="true">
           <itemPath>../app/web_pages2/HTTPPrint.c</itemPath>

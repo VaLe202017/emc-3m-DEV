@@ -112,10 +112,13 @@ int main(void) {
 
     PT_INIT(&pt_gps);
     PT_INIT(&pt_prgm);
+    
+    
 
     sys_int4_init();
     sys_iic2_init();
     sys_iic3_init();
+    sys_interupt4_init();
     mcp_impl_init();
 
     ds3231_1hz_enable();
@@ -137,8 +140,10 @@ int main(void) {
         mcp_flt_init();
     }*/
     AppConfig.implSet[2].implMode=1;
-    mcp_flt_init();
+    //mcp_flt_init();
     
+    
+    PT_INIT(&pt_fault);
 
     ds_check_new_time();
 

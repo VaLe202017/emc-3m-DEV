@@ -179,4 +179,6 @@
 #define IS_KEY_ENTR_PRESSED     ((PORTB & KEY2)== 0U)
 #define IS_KEY_MINUS_PRESSED    ((PORTB & KEY3)== 0U)
 
+#define IS_INTA_PRESSED    ((PORTA & (MCP_INT)    ) == 0U)
+
 /*÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷*/

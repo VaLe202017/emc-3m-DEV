@@ -114,5 +114,8 @@ bool sys_t1_is_dly_end(uint32_t ticks1, uint32_t dt);
 void sys_t1_ser4ticks_reset();
 bool sys_t1_ser4ticks_tout_end();
 
+void sys_interupt4_init();
+uint8_t sys_intertupt4Signal_get();
+
 #endif	/* __SYSTEM_H__ */
 

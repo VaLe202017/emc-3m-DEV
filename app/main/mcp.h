@@ -23,17 +23,6 @@ void mcp_set_polarity_lop2(void); //low power coast impulse 2
 
 void mcp_flt_init(void);
 UINT mcp_flt_read(void);
-BOOL mcp_flt_is_pluged(void);
-UINT mcp_flt_read(void);
 
-BOOL mcp_flt1_pressed(void);
-BOOL mcp_flt2_pressed(void);
-BOOL mcp_flt_pressed(void);
-
-UINT mcp_flt_read_intf(void);
-
-UINT mcp_rtry1_pressed(void);
-UINT mcp_rtry2_pressed(void);
-UINT mcp_flt_status(void);
 
 #endif	/* __MCP_H__ */
